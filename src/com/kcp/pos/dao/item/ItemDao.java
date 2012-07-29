@@ -6,6 +6,7 @@
 package com.kcp.pos.dao.item;
 
 import com.kcp.pos.modal.Item;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.kcp.pos.modal.Item;
  */
 public interface ItemDao {
     public Item saveItems(Item item);
+    public List<Item> getAllItems();
 }

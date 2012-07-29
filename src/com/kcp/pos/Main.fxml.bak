@@ -14,8 +14,7 @@
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Click Me!" />
-            <Label fx:id="label" layoutX="43.0" layoutY="55.0" minHeight="16.0" minWidth="69.0" />
+            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Save" />
             <GridPane alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="317.0" prefWidth="337.0">
               <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -73,6 +72,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+            <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -81,7 +81,16 @@
               <tabs>
                 <Tab fx:id="items_tab" text="Items">
                   <content>
-                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                        <TableView fx:id="dataTable" prefHeight="317.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Name" fx:id="name" />
+                            <TableColumn prefWidth="75.0" text="MRP" fx:id="mrpData" />
+                          </columns>
+                        </TableView>
+                      </children>
+                    </AnchorPane>
                   </content>
                 </Tab>
                 <Tab text="Stocks">

@@ -8,14 +8,20 @@ import com.kcp.pos.dao.item.ItemDao;
 import com.kcp.pos.dao.item.ItemDaoImpl;
 import com.kcp.pos.modal.Item;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.util.Duration;
 
 /**
  *
@@ -23,35 +29,30 @@ import javafx.scene.control.TextField;
  */
 public class MainController implements Initializable {
     
-    @FXML
-    private Label label;
+    @FXML private Label label;
     
-    @FXML
-    private TextField itemName;
+    @FXML private TextField itemName;
      
-    @FXML
-    private TextField itemBarcode;
+    @FXML private TextField itemBarcode;
     
-    @FXML
-    private TextField itemMrp;
+    @FXML private TextField itemMrp;
     
-    @FXML
-    private TextField itemWeight;
+    @FXML private TextField itemWeight;
     
-    @FXML
-    private TextField actualPrice;
+    @FXML private TextField actualPrice;
      
-    @FXML
-    private TextField sellingPrice;
+    @FXML private TextField sellingPrice;
     
-    @FXML
-    private CheckBox hasGift = new CheckBox();
+    @FXML private CheckBox hasGift = new CheckBox();
     
-    @FXML
-    private ChoiceBox weightUnit = new ChoiceBox();
+    @FXML private ChoiceBox weightUnit = new ChoiceBox();
     
+    @FXML public TableView<Item> dataTable;
   
-     
+    private final ObservableList<Item> dataTableData = FXCollections.observableArrayList();
+    
+    ItemDao itemDao = new ItemDaoImpl();
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         Item item = new Item();
@@ -62,11 +63,12 @@ public class MainController implements Initializable {
         item.setActualPrice(Double.valueOf(actualPrice.getText()));
         item.setSellingPrice(Double.valueOf(sellingPrice.getText()));
         System.out.println("hasGift.getText()"+hasGift);
-        //item.setHasGift(hasGift.getText());
+        item.setHasGift(hasGift.isSelected());
         item.setWeightUnit((String)weightUnit.getSelectionModel().getSelectedItem());
-        ItemDao itemDao = new ItemDaoImpl();
+        
         itemDao.saveItems(item);
         label.setText("Item Saved");
+        animateMessage();
         System.out.println("saved");
     }
     
@@ -74,10 +76,22 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          weightUnit.getItems().removeAll("Item 1","Item 2","Item 3"," ");
          weightUnit.getItems().addAll("choose", "mg", "cg","dg","g","kg");
+         dataTable.setItems(dataTableData);
+         fillDataTable();
     }   
     
     private void clearForm(){
     
     }
+    private void animateMessage() {
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), label);
+        ft.setFromValue(0.0);
+        ft.setToValue(1);
+        ft.play();
+    }
     
+    private void fillDataTable(){
+       List<Item> items = itemDao.getAllItems();
+       dataTableData.setAll(items);
+    }
 }
