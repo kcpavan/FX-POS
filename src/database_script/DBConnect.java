@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fx.pos.db;
+package database_script;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DBConnect {
     private static Connection conn;
 
-    private static String url = "jdbc:mysql://localhost:3306/pos";
+    private static String url = "jdbc:mysql://localhost:3306/storedb";
 
     private static String user = "root";
 

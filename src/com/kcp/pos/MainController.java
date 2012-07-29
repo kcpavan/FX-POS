@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package fx.pos;
+package com.kcp.pos;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
  *
  * @author pavankumar
  */
-public class SampleController implements Initializable {
+public class MainController implements Initializable {
     
     @FXML
     private Label label;
