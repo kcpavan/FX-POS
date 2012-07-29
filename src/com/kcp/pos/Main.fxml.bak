@@ -51,7 +51,6 @@
                 <Label font="$x1" text="Selling Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label font="$x1" text="Has Gift Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="sellingPrice" prefHeight="26.0" prefWidth="190.0" promptText="Selling Price" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <CheckBox mnemonicParsing="false" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="107.0" />
