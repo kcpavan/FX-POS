@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package database_script;
+package com.kcp.pos.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

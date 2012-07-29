@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -13,8 +14,7 @@
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Click Me!" />
-            <Label fx:id="label" layoutX="43.0" layoutY="55.0" minHeight="16.0" minWidth="69.0" />
+            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Save" />
             <GridPane alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="317.0" prefWidth="337.0">
               <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -32,6 +32,15 @@
                 <TextField fx:id="itemMrp" prefHeight="26.0" prefWidth="231.0" promptText="M.R.P" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="itemWeight" prefHeight="26.0" prefWidth="231.0" promptText="Weight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="actualPrice" prefHeight="25.999900000002526" prefWidth="231.0" promptText="Actual Price" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ChoiceBox fx:id="weightUnit" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="106.0" />
@@ -51,7 +60,7 @@
                 <Label font="$x1" text="Selling Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label font="$x1" text="Has Gift Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="sellingPrice" prefHeight="26.0" prefWidth="190.0" promptText="Selling Price" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <CheckBox mnemonicParsing="false" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <CheckBox fx:id="hasGift" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="107.0" />
@@ -63,6 +72,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
+            <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -74,7 +84,7 @@
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                <Tab text="Untitled Tab 2">
+                <Tab text="Stocks">
                   <content>
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
