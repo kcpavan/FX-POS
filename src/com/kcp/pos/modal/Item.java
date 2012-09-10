@@ -4,20 +4,24 @@
  */
 package com.kcp.pos.modal;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author K.C.Pavan
  */
 public class Item {
-    
-   private String name;
-   private String barcode;
-   private double mrp;
-   private double weight;
-   private String weightUnit;
-   private double actualPrice;
-   private double sellingPrice;
-   private boolean hasGift;
+
+    private String name;
+    private String barcode;
+    private double mrp;
+    private double weight;
+    private String weightUnit;
+    private double actualPrice;
+    private double sellingPrice;
+    private boolean hasGift;
 
     public String getName() {
         return name;
@@ -74,8 +78,8 @@ public class Item {
     public void setHasGift(boolean hasGift) {
         this.hasGift = hasGift;
     }
-    
-     public String getWeightUnit() {
+
+    public String getWeightUnit() {
         return weightUnit;
     }
 
@@ -83,4 +87,21 @@ public class Item {
         this.weightUnit = weightUnit;
     }
 
+    public String getItemBarcode() {
+        return itemBarcode.get();
+    }
+
+    public String getItemName() {
+        return itemName.get();
+    }
+    
+    public SimpleStringProperty itemBarcode = new SimpleStringProperty("<BarCode>");
+
+    public SimpleStringProperty itemName = new SimpleStringProperty("<Name>");
+    
+    public SimpleDoubleProperty itemMrp = new SimpleDoubleProperty();
+
+    public double getItemMrp() {
+        return itemMrp.get();
+    }
 }

@@ -49,7 +49,7 @@ public class ItemDaoImpl implements ItemDao{
         List<Item> items=new ArrayList<Item>();
          try {
                Connection con = DBConnect.getConnection();
-               String sql= "select item_name,item_mrp from items";
+               String sql= "select item_name,item_mrp,item_barcode from items";
                
             PreparedStatement prest = con.prepareStatement(sql);
             ResultSet  resultSet= prest.executeQuery();
@@ -57,6 +57,10 @@ public class ItemDaoImpl implements ItemDao{
                 Item item= new  Item();
                 item.setName(resultSet.getString("item_name"));
                 item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
+                item.setBarcode(resultSet.getString("item_barcode"));
+                item.itemName.set(item.getName());
+                item.itemBarcode.set(item.getBarcode());
+                item.itemMrp.set(item.getMrp());
                 items.add(item); 
             } 
             

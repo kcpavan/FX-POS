@@ -85,8 +85,9 @@
                       <children>
                         <TableView fx:id="dataTable" prefHeight="317.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Name" fx:id="name" />
-                            <TableColumn prefWidth="75.0" text="MRP" fx:id="mrpData" />
+                            <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
+                            <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
+                            <TableColumn prefWidth="75.0" text="M.R.P" />
                           </columns>
                         </TableView>
                       </children>

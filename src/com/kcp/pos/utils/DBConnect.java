@@ -19,7 +19,7 @@ public class DBConnect {
 
     private static String user = "root";
 
-    private static String pass = "";
+    private static String pass = "xorail123";
 
  
 

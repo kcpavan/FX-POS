@@ -19,8 +19,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 
 /**
@@ -51,6 +53,10 @@ public class MainController implements Initializable {
   
     private final ObservableList<Item> dataTableData = FXCollections.observableArrayList();
     
+    @FXML private TableColumn<Item, String> itemNameCol;
+    @FXML private TableColumn<Item, String> itemBarcodeCol;
+    @FXML private TableColumn<Item, Double> itemMRP;
+    
     ItemDao itemDao = new ItemDaoImpl();
     
     @FXML
@@ -69,6 +75,8 @@ public class MainController implements Initializable {
         itemDao.saveItems(item);
         label.setText("Item Saved");
         animateMessage();
+        fillDataTable();
+        clearForm();
         System.out.println("saved");
     }
     
@@ -77,10 +85,22 @@ public class MainController implements Initializable {
          weightUnit.getItems().removeAll("Item 1","Item 2","Item 3"," ");
          weightUnit.getItems().addAll("choose", "mg", "cg","dg","g","kg");
          dataTable.setItems(dataTableData);
+         itemBarcodeCol.setCellValueFactory(
+                new PropertyValueFactory<Item, String>("itemBarcode"));
+         itemNameCol.setCellValueFactory(
+                new PropertyValueFactory<Item, String>("itemName"));
+          itemMRP.setCellValueFactory(
+                new PropertyValueFactory<Item, Double>("itemMrp"));
          fillDataTable();
     }   
     
     private void clearForm(){
+         itemName.clear();
+        itemBarcode.clear();
+        itemMrp.clear();
+        itemWeight.clear();
+        actualPrice.clear();
+        sellingPrice.clear();
     
     }
     private void animateMessage() {
@@ -92,6 +112,9 @@ public class MainController implements Initializable {
     
     private void fillDataTable(){
        List<Item> items = itemDao.getAllItems();
+       System.out.println("items in list"+items.size());
        dataTableData.setAll(items);
     }
+    
+   
 }
