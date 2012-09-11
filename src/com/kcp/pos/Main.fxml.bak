@@ -87,7 +87,7 @@
                           <columns>
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
-                            <TableColumn prefWidth="75.0" text="M.R.P" />
+                            <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
                           </columns>
                         </TableView>
                       </children>

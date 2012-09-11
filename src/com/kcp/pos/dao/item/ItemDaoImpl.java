@@ -69,5 +69,32 @@ public class ItemDaoImpl implements ItemDao{
         }
          return items;
     }
+    
+    
+     public int getInvoiceNumber()
+     {
+          List<Item> items=new ArrayList<Item>();
+         try {
+               Connection con = DBConnect.getConnection();
+               String sql= "insert into invoice";
+               
+            PreparedStatement prest = con.prepareStatement(sql);
+            ResultSet  resultSet= prest.executeQuery();
+            while(resultSet.next()){
+                Item item= new  Item();
+                item.setName(resultSet.getString("item_name"));
+                item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
+                item.setBarcode(resultSet.getString("item_barcode"));
+                item.itemName.set(item.getName());
+                item.itemBarcode.set(item.getBarcode());
+                item.itemMrp.set(item.getMrp());
+                items.add(item); 
+            } 
+            
+         } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return items;
+     }
 
 }
