@@ -21,19 +21,39 @@ stock_quantity bigint not null,
 stock_quantity_unit varchar(50) not null
 );
 
+drop table if exists storedb.purchase;
+create table storedb.purchase
+(purchase_id_pk integer primary key not null auto_increment,
+purchase_number integer not null,
+purchase_distibutor_id_fk integer not null,
+purchase_received_date timestamp not null
+);
+
+
+drop table if exists storedb.purchase_details;
+create table storedb.purchase_details
+(purchase_details_id_pk integer primary key not null auto_increment,
+purchase_id_fk integer not null,
+purchase_distibutor_id_fk integer not null,
+purchase_received_date timestamp not null
+);
+
+
 drop table if exists storedb.invoice;
 create table storedb.invoice
 (invoice_id_pk integer primary key not null auto_increment,
-invoice_number integer not null,
-invoice_distibutor_id_fk integer not null,
-invoice_received_date timestamp not null
+invoice_total_items integer not null,
+invoice_user_id_fk integer not null,
+invoice_date timestamp not null,
+invoice_total_amount double not null
 );
 
 
 drop table if exists storedb.invoice_details;
 create table storedb.invoice_details
-(invoicedetails_id_pk integer primary key not null auto_increment,
-invoice_id_fk integer not null,
-invoice_distibutor_id_fk integer not null,
-invoice_received_date timestamp not null
+(invoice_det_id_pk integer primary key not null auto_increment,
+invoice_det_invoice_id_fk integer not null,
+invoice_det_item_id_fk integer not null,
+invoice_det_quantity double not null,
+invoice_det_total double not null
 );

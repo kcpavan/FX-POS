@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="main_window" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.MainController">
+<AnchorPane id="AnchorPane" fx:id="main_window" prefHeight="771.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.InvoiceController">
   <children>
-    <SplitPane dividerPositions="0.5730659025787965" focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.48634590377113135, 0.988296488946684" focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="698.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="256.0" prefWidth="698.0">
           <children>
-            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Save" />
-            <GridPane alignment="CENTER" layoutX="12.0" layoutY="39.0" prefHeight="317.0" prefWidth="337.0">
+            <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Add" />
+            <GridPane alignment="CENTER" layoutX="13.0" layoutY="66.0" prefHeight="272.0" prefWidth="337.0">
               <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <font>
@@ -26,13 +26,21 @@
                 <Label font="$x1" text="MRP" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <Label font="$x1" text="Weight" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <Label font="$x1" text="Weight Unit" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                <Label font="$x1" text="Actual Price" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                <TextField fx:id="itemName" prefHeight="26.0" prefWidth="168.0" promptText="Name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label font="$x1" text="Billing Price" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                 <TextField fx:id="itemBarcode" prefHeight="26.0" prefWidth="231.0" promptText="Barcode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="itemMrp" prefHeight="26.0" prefWidth="231.0" promptText="M.R.P" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="itemWeight" prefHeight="26.0" prefWidth="231.0" promptText="Weight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField fx:id="actualPrice" prefHeight="25.999900000002526" prefWidth="231.0" promptText="Actual Price" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField id="actualPrice" fx:id="billingPrice" prefHeight="25.999900000002526" prefWidth="231.0" promptText="Actual Price" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <ChoiceBox fx:id="weightUnit" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <ChoiceBox fx:id="itemName" GridPane.columnIndex="1" GridPane.rowIndex="0">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />
@@ -55,11 +63,11 @@
                 <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane layoutX="378.0" layoutY="59.0" prefHeight="156.0" prefWidth="297.0">
+            <GridPane layoutX="394.0" layoutY="54.0" prefHeight="190.0" prefWidth="297.0">
               <children>
-                <Label font="$x1" text="Selling Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label font="$x1" text="Quantity" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label font="$x1" text="Has Gift Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="sellingPrice" prefHeight="26.0" prefWidth="190.0" promptText="Selling Price" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField id="sellingPrice" fx:id="itemQuantity" prefHeight="26.0" prefWidth="190.0" promptText="quantity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <CheckBox fx:id="hasGift" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
@@ -73,16 +81,18 @@
               </rowConstraints>
             </GridPane>
             <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
-            <Label layoutX="309.0" layoutY="6.0" text="Stocks">
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="250.0" layoutY="14.0" prefWidth="69.0" text="Invoice">
               <font>
-                <Font name="System Bold" size="20.0" />
+                <Font size="16.0" />
               </font>
             </Label>
+            <Label fx:id="invoiceNumber" layoutX="366.0" layoutY="14.0" prefHeight="22.0" prefWidth="71.0" />
+            <Label fx:id="invoiceNumber" layoutX="335.0" layoutY="17.0" prefWidth="69.0" text="Label" />
           </children>
         </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="698.0">
           <children>
-            <TabPane prefHeight="346.0" prefWidth="698.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane prefHeight="386.0" prefWidth="698.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-6.0">
               <tabs>
                 <Tab fx:id="items_tab" text="Items">
                   <content>
@@ -93,6 +103,9 @@
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
                             <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
+                            <TableColumn prefWidth="75.0" text="Billing Price" fx:id="itemBillingPrice" />
+                            <TableColumn prefWidth="75.0" text="Quantity" fx:id="itemQuantity" />
+                            <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotal" />
                           </columns>
                         </TableView>
                       </children>
@@ -108,13 +121,8 @@
             </TabPane>
           </children>
         </AnchorPane>
+        <TextField prefWidth="200.0" />
       </items>
     </SplitPane>
   </children>
-  <prefHeight>
-    <Long fx:value="700" />
-  </prefHeight>
-  <prefWidth>
-    <Long fx:value="700" />
-  </prefWidth>
 </AnchorPane>
