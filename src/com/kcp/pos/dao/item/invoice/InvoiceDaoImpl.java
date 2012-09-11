@@ -7,6 +7,7 @@ package com.kcp.pos.dao.item.invoice;
 import com.kcp.pos.dao.item.ItemDaoImpl;
 import com.kcp.pos.modal.Invoice;
 import com.kcp.pos.modal.InvoiceDetails;
+
 import com.kcp.pos.modal.Item;
 import com.kcp.pos.utils.DBConnect;
 import java.sql.Connection;
@@ -148,7 +149,7 @@ invoice_det_total double not null
       
        public Invoice getInvoiceById()
        {
-           Item item=null;
+           Invoice invoice=null;
        try {
         /*
          * invoice_id_pk integer primary key not null auto_increment,
@@ -157,16 +158,17 @@ invoice_user_id_fk integer not null,
 invoice_date timestamp not null,
 invoice_total_amount double not null
          */
+           String name=null;
             Connection con = DBConnect.getConnection();
             String sql = "select item_selling_price from"
-                    + " invoice where item_name="+Name;
+                    + " invoice where item_name="+name;
             
             PreparedStatement prest = con.prepareStatement(sql);
             
             ResultSet rs=prest.executeQuery();
             while(rs.next())
             {
-                item.setSellingPrice(rs.getInt(1));
+                invoice.setSellingPrice(rs.getInt(1));
             }
             prest.close();
             con.close();
@@ -177,7 +179,8 @@ invoice_total_amount double not null
         } catch (SQLException ex) {
             Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         } 
-       return item;
+       return invoice;
        }
     
+
 }

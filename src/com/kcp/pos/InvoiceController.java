@@ -32,6 +32,7 @@ import javafx.util.Duration;
  *
  * @author pbhimanna
  */
+
 public class InvoiceController implements Initializable {
 
     @FXML
@@ -174,11 +175,11 @@ public class InvoiceController implements Initializable {
 
 
         ItemDao itemDao = new ItemDaoImpl();
-        itemDao.getIdByName(selectedItem.toString());
+       // itemDao.getIdByName(selectedItem.toString());
 
         String itemQty = itemQuantity.getText();
         invoiceDetails.setInvoiceItemQuantity(Integer.parseInt(itemQty));
-
+         Object selectedItem = itemName.getSelectionModel().getSelectedItem();
         Item item = itemDao.getItemByName(selectedItem.toString());
 
         double itemTotalPrice = item.getSellingPrice() * Integer.parseInt(itemQty);
