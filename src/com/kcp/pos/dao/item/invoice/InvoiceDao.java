@@ -7,6 +7,7 @@ package com.kcp.pos.dao.item.invoice;
 import com.kcp.pos.modal.Invoice;
 
 import com.kcp.pos.modal.InvoiceDetails;
+import com.kcp.pos.modal.Item;
 import java.util.List;
 
 /**
@@ -17,13 +18,16 @@ public interface InvoiceDao {
     
     
     public Invoice addItems(Invoice item);
-    public List<Invoice> saveInvoice();
+    public int saveInvoice(List<InvoiceDetails> invoiceDetailsList);
     
     public int getInvoiceId();
     
      public boolean addInvoiceItem(InvoiceDetails invoiceDetails);
      
      public Invoice getInvoiceById();
+     
+    
+    
 
     
 }

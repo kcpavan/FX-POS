@@ -10,12 +10,12 @@
 
 <AnchorPane id="AnchorPane" fx:id="main_window" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.MainController">
   <children>
-    <SplitPane dividerPositions="0.5" focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <SplitPane dividerPositions="0.5730659025787965" focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="410.0" prefWidth="698.0">
           <children>
             <Button fx:id="button" layoutX="605.0" layoutY="299.0" onAction="#handleButtonAction" text="Save" />
-            <GridPane alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="317.0" prefWidth="337.0">
+            <GridPane alignment="CENTER" layoutX="12.0" layoutY="39.0" prefHeight="317.0" prefWidth="337.0">
               <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
                   <font>
@@ -55,7 +55,7 @@
                 <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <GridPane layoutX="394.0" layoutY="14.0" prefHeight="156.0" prefWidth="297.0">
+            <GridPane layoutX="378.0" layoutY="59.0" prefHeight="156.0" prefWidth="297.0">
               <children>
                 <Label font="$x1" text="Selling Price" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label font="$x1" text="Has Gift Item" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -73,6 +73,11 @@
               </rowConstraints>
             </GridPane>
             <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
+            <Label layoutX="309.0" layoutY="6.0" text="Stocks">
+              <font>
+                <Font name="System Bold" size="20.0" />
+              </font>
+            </Label>
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

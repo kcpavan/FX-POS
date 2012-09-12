@@ -11,6 +11,7 @@ import com.kcp.pos.dao.item.invoice.InvoiceDaoImpl;
 import com.kcp.pos.modal.InvoiceDetails;
 import com.kcp.pos.modal.Item;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -70,6 +71,36 @@ public class InvoiceController implements Initializable {
     private TableColumn<Item, Double> itemQuantityCol;
     @FXML
     private TableColumn<Item, Double> itemTotal;
+    
+    private List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
+    private List<Item> itemList=new ArrayList<Item>();
+    
+     ItemDao itemDao = new ItemDaoImpl();
+
+    public List<Item> getItemList() {
+       List<Item> list=itemDao.getAllItems();
+               setItemList(list);
+       return list;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+    
+    
+    
+
+    public List<InvoiceDetails> getInvoiceDetailsList() {
+        return invoiceDetailsList;
+    }
+
+    public void setInvoiceDetailsList(List<InvoiceDetails> invoiceDetailsList) {
+        this.invoiceDetailsList = invoiceDetailsList;
+    }
+    
+    
+    
+    
     InvoiceDao invoiceDao = new InvoiceDaoImpl();
 
     public Label getInvoiceNumber() {
@@ -97,7 +128,7 @@ public class InvoiceController implements Initializable {
         invoiceDetails.setInvoiceIdFk(Integer.parseInt(invoiceNum));
 
 
-        ItemDao itemDao = new ItemDaoImpl();
+       
         itemDao.getIdByName(selectedItem.toString());
 
         String itemQty = itemQuantity.getText();
@@ -161,8 +192,8 @@ public class InvoiceController implements Initializable {
     public void saveAllInvoiceItems() {
         InvoiceDetails invoiceDetails = new InvoiceDetails();
 
-       
-
+        invoiceDao.saveInvoice(getInvoiceDetailsList());
+        
         String invoiceNum = invoiceNumber.getText();
 
         if (invoiceNum == null) {

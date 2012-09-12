@@ -73,7 +73,7 @@
               </rowConstraints>
             </GridPane>
             <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
-            <Label layoutX="309.0" layoutY="6.0" text="Stocks">
+            <Label layoutX="309.0" layoutY="6.0" text="Items">
               <font>
                 <Font name="System Bold" size="20.0" />
               </font>

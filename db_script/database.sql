@@ -8,7 +8,7 @@ mainuser_username string not null,
 mainuser_firstname timestamp not null,
 mainuser_lastname double not null,
 mainuser_state int not null,
-mainuser_role_id_fk int not null
+mainuser_group_id_fk int not null
 );
 
 
@@ -22,6 +22,7 @@ create table storedb.items
 (item_id_pk integer primary key not null auto_increment,
 item_name varchar(250) not null,
 item_barcode varchar(250) not null,
+item_category_id_fk int not null,/*Add foreign  key reference*/
 item_mrp double not null,
 item_weight double not null,
 item_weight_unit varchar(50) not null,
@@ -29,6 +30,11 @@ item_actual_price double not null,
 item_selling_price double not null,
 item_hasfree boolean not null
 );
+
+drop table if exists storedb.item_category;
+create table storedb.item_category
+(category_id_pk integer primary key not null auto_increment,
+category_name varchar(250) not null);
 
 drop table if exists storedb.stocks;
 create table storedb.stocks

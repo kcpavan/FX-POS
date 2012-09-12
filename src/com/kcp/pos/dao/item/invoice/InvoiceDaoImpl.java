@@ -75,10 +75,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public List<Invoice> saveInvoice() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+   
     
      public int getInvoiceId()
     {
@@ -182,5 +179,37 @@ invoice_total_amount double not null
        return invoice;
        }
     
-
+       
+       public int saveInvoice(List<InvoiceDetails> invoiceDetailsList)
+       {
+           int returnValue=0;
+       try {
+           double total=0.0;
+           int invoiceIdPk=0;
+           for(InvoiceDetails data:invoiceDetailsList)
+           {
+               total=total+data.getInvoiceItemTotalPrice();
+               invoiceIdPk=data.getInvoiceIdFk();
+           }
+            Connection con = DBConnect.getConnection();
+            String sql = "update invoice "
+                   
+                    + " set  invoice_total ="+total
+                    +"  where invoice_id_pk="+invoiceIdPk;
+            PreparedStatement prest = con.prepareStatement(sql);
+            
+            
+            returnValue=prest.executeUpdate();
+            
+            //need to return auto incremented id
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+           
+           return returnValue;
+       }
+       
+       
+      
 }
