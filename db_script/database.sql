@@ -82,7 +82,3 @@ invoice_det_item_id_fk integer not null,
 invoice_det_quantity double not null,
 invoice_det_total double not null
 );
-
-
-
-
