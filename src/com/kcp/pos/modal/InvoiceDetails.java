@@ -28,14 +28,6 @@ public class InvoiceDetails extends Item{
     }
 
    
-    
-
-  
-
-   
-
-   
-
    public InvoiceDetails()
    {
        super();
