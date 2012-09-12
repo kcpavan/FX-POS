@@ -13,9 +13,13 @@ import com.kcp.pos.modal.Item;
 import com.kcp.pos.utils.KCPUtils;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +34,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 
 /**
  *
@@ -76,6 +81,8 @@ public class InvoiceController implements Initializable {
     
     private List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
     private List<Item> itemList=new ArrayList<Item>();
+    private Map<String,Item> itemMap=new HashMap<String,Item>();
+    
     
      ItemDao itemDao = new ItemDaoImpl();
 
@@ -126,7 +133,7 @@ public class InvoiceController implements Initializable {
         {
              label.setText("Please select item");
         animateMessage();
-        fillDataTable();
+        fillInvoiceDataTable();
         
         System.out.println("reenter item");
         return;
@@ -140,6 +147,7 @@ public class InvoiceController implements Initializable {
         
         if (invoiceNum == null || invoiceNum.equalsIgnoreCase("")) {
             invoiceNum = new Integer(invoiceDao.getInvoiceId()).toString();
+            invoiceNumber.setText(invoiceNum);
             System.out.println("new invoice number:"+invoiceNum);
         }
         invoiceDetails.setInvoiceIdFk(Integer.parseInt(invoiceNum));
@@ -154,7 +162,7 @@ public class InvoiceController implements Initializable {
         {
              label.setText("Please select item quantity");
         animateMessage();
-        fillDataTable();
+        fillInvoiceDataTable();
         
         System.out.println("reenter item");
         return;
@@ -171,13 +179,13 @@ public class InvoiceController implements Initializable {
         invoiceDetails.setInvoiceItemTotalPrice(itemTotalPrice);
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
-        invoiceDao.addInvoiceItem(invoiceDetails);
+        invoiceDao.addInvoiceItem(invoiceDetails,item);
 
 
 
         label.setText("Item Saved");
         animateMessage();
-        fillDataTable();
+        fillInvoiceDataTable();
         clearForm();
         System.out.println("saved");
     }
@@ -185,6 +193,30 @@ public class InvoiceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         itemName.getItems().removeAll("Item 1", "Item 2", "Item 3", " ");
+        List<Item> itemList=itemDao.getAllItems();
+        
+        for(Item item:itemList)
+        {
+            itemMap.put(item.getName(),item);
+            itemName.getItems().add(item.getItemName());
+        }
+
+        
+        itemName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+      @Override public void changed(ObservableValue<? extends String> selected, String oldItem, String newItem) {
+       Item item=itemMap.get(newItem);
+       itemBarcode.setText(item.getBarcode());
+       itemMrp.setText(new Double(item.getMrp()).toString());
+       itemWeight.setText(new Double(item.getWeight()).toString());
+       //weightUnit.setSelectionModel(item.getWeightUnit());
+       billingPrice.setText(new Double(item.getSellingPrice()).toString());
+       
+       
+      
+      }
+    });
+        
+        
         weightUnit.getItems().removeAll("Item 1", "Item 2", "Item 3", " ");
         weightUnit.getItems().addAll("choose", "mg", "cg", "dg", "g", "kg");
         dataTable.setItems(dataTableData);
@@ -194,7 +226,7 @@ public class InvoiceController implements Initializable {
                 new PropertyValueFactory<Item, String>("itemName"));
         itemMRP.setCellValueFactory(
                 new PropertyValueFactory<Item, Double>("itemMrp"));
-        fillDataTable();
+        fillInvoiceDataTable();
     }
 
     private void clearForm() {
@@ -213,9 +245,10 @@ public class InvoiceController implements Initializable {
         ft.play();
     }
 
-    private void fillDataTable() {
+    private void fillInvoiceDataTable() {
         ItemDao itemDao = new ItemDaoImpl();
-        List<Item> items = itemDao.getAllItems();
+        invoiceNumber.getText();
+        List<InvoiceDetails> items = invoiceDao.getInvoiceItems(invoiceNumber.getText());
         System.out.println("items in list" + items.size());
         dataTableData.setAll(items);
     }
@@ -249,13 +282,15 @@ public class InvoiceController implements Initializable {
         invoiceDetails.setInvoiceItemTotalPrice(itemTotalPrice);
 
         InvoiceDao invoiceDao = new InvoiceDaoImpl();
-        invoiceDao.addInvoiceItem(invoiceDetails);
+        //invoiceDao.addInvoiceItem(invoiceDetails);
+        
+        //invoiceDao.saveInvoice(invoiceDetails);
 
 
 
         label.setText("Item Saved");
         animateMessage();
-        fillDataTable();
+        fillInvoiceDataTable();
         clearForm();
         System.out.println("saved");
     }

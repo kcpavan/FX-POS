@@ -15,8 +15,8 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Invoice extends Item {
     
+
     private int invoiceNumber;
-    
     private int invoiceUser;
     private Date invoiceDate;
     private double total;
@@ -94,6 +94,7 @@ public class Invoice extends Item {
         this.total = total;
     }
 
+  
     
     
     

@@ -22,11 +22,11 @@ public interface InvoiceDao {
     
     public int getInvoiceId();
     
-     public boolean addInvoiceItem(InvoiceDetails invoiceDetails);
+     public boolean addInvoiceItem(InvoiceDetails invoiceDetails,Item item);
      
      public Invoice getInvoiceById();
      
-    
+    public List<InvoiceDetails> getInvoiceItems(String invoiceNumber);
     
 
     

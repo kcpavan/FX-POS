@@ -23,7 +23,7 @@ create table storedb.items
 (item_id_pk integer primary key not null auto_increment,
 item_name varchar(250) not null,
 item_barcode varchar(250) not null,
-item_category_id_fk int not null,/*Add foreign  key reference*/
+/*item_category_id_fk int not null,/*Add foreign  key reference*/
 item_mrp double not null,
 item_weight double not null,
 item_weight_unit varchar(50) not null,

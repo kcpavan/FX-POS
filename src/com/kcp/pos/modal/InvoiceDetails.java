@@ -2,6 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+
 package com.kcp.pos.modal;
 
 import java.util.Date;
@@ -14,19 +17,36 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Prakash
  */
 public class InvoiceDetails extends Item{
-
+    private int invoiceDetailsIdPk;
     private int invoiceIdFk;
-    private int itemIdFk;
+    private int invoiceItemIdFk;
     private int invoiceItemQuantity;
     private double invoiceItemTotalPrice;
 
-    public InvoiceDetails(int invoiceIdFk, int itemIdFk, int invoiceItemQuantity, double invoiceItemTotalPrice) {
+    public InvoiceDetails(int invoiceIdFk, int invoiceItemIdFk, int invoiceItemQuantity, double invoiceItemTotalPrice) {
         this.invoiceIdFk = invoiceIdFk;
-        this.itemIdFk = itemIdFk;
+        this.invoiceItemIdFk = invoiceItemIdFk;
         this.invoiceItemQuantity = invoiceItemQuantity;
         this.invoiceItemTotalPrice = invoiceItemTotalPrice;
     }
 
+    public int getInvoiceDetailsIdPk() {
+        return invoiceDetailsIdPk;
+    }
+
+    public void setInvoiceDetailsIdPk(int invoiceDetailsIdPk) {
+        this.invoiceDetailsIdPk = invoiceDetailsIdPk;
+    }
+
+    public int getInvoiceItemIdFk() {
+        return invoiceItemIdFk;
+    }
+
+    public void setInvoiceItemIdFk(int invoiceItemIdFk) {
+        this.invoiceItemIdFk = invoiceItemIdFk;
+    }
+
+    
    
    public InvoiceDetails()
    {
@@ -41,13 +61,7 @@ public class InvoiceDetails extends Item{
         this.invoiceIdFk = invoiceIdFk;
     }
 
-    public int getItemIdFk() {
-        return itemIdFk;
-    }
 
-    public void setItemIdFk(int itemIdFk) {
-        this.itemIdFk = itemIdFk;
-    }
 
     public int getInvoiceItemQuantity() {
         return invoiceItemQuantity;

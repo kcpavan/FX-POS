@@ -32,7 +32,7 @@
                 <TextField fx:id="itemMrp" prefHeight="26.0" prefWidth="231.0" promptText="M.R.P" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="itemWeight" prefHeight="26.0" prefWidth="231.0" promptText="Weight" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="actualPrice" prefHeight="25.999900000002526" prefWidth="231.0" promptText="Actual Price" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <ChoiceBox fx:id="weightUnit" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ChoiceBox fx:id="weightUnit" onInputMethodTextChanged="#handleButtonAction" GridPane.columnIndex="1" GridPane.rowIndex="4">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="Item 1" />

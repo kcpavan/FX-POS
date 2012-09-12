@@ -106,7 +106,7 @@ public class ItemDaoImpl implements ItemDao{
      
       public Item getItemByName(String Name)
       {
-         Item item=null;
+         Item item=new Item();
        try {
            /*
             * item_id_pk integer primary key not null auto_increment,

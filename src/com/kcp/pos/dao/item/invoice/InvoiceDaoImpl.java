@@ -10,6 +10,7 @@ import com.kcp.pos.modal.InvoiceDetails;
 
 import com.kcp.pos.modal.Item;
 import com.kcp.pos.utils.DBConnect;
+import com.kcp.pos.utils.KCPUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
                     + "total_amount) VALUES(?,?,?,?) ";
             PreparedStatement prest = con.prepareStatement(sql);
             prest.setInt(1, item.getInvoiceIdFk());
-            prest.setInt(2, item.getItemIdFk());
+            prest.setInt(2, item.getInvoiceItemIdFk());
             prest.setInt(3, item.getInvoiceItemQuantity());
             prest.setDouble(4, item.getInvoiceItemTotalPrice());
             
@@ -109,7 +110,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
         return auto_id; 
     }
      
-      public boolean addInvoiceItem(InvoiceDetails invoiceDetails)
+      public boolean addInvoiceItem(InvoiceDetails invoiceDetails,Item item)
       {
           int auto_id=0;
        try {
@@ -130,8 +131,10 @@ invoice_det_total double not null
             PreparedStatement prest = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             prest.setInt(1, invoiceDetails.getInvoiceIdFk());
           
-            prest.setInt(2,invoiceDetails.getItemIdFk());
+            prest.setInt(2,invoiceDetails.getInvoiceItemIdFk());
             prest.setInt(3, invoiceDetails.getInvoiceItemQuantity());
+            prest.setDouble(4,invoiceDetails.getInvoiceItemQuantity()*item.getSellingPrice());
+            
             
             prest.executeUpdate();
             
@@ -212,6 +215,55 @@ invoice_total_amount double not null
            return returnValue;
        }
        
+       public List<InvoiceDetails> getInvoiceItems(String invoiceNumber)
+       {
+            List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
+       try {
+        /*
+         * invoice_id_pk integer primary key not null auto_increment,
+invoice_total_items integer not null,
+invoice_user_id_fk integer not null,
+invoice_date timestamp not null,
+invoice_total_amount double not null
+         */
+           String name=null;
+            Connection con = DBConnect.getConnection();
+            
+            if(KCPUtils.isNullString(invoiceNumber))
+                invoiceNumber="1";
+            String sql = "select * from "
+                    + " invoice_details where invoice_det_invoice_id_fk="+invoiceNumber;
+            System.out.println("sql:"+sql);
+            PreparedStatement prest = con.prepareStatement(sql);
+            
+            ResultSet rs=prest.executeQuery();
+            InvoiceDetails data=null;
+            while(rs.next())
+            {
+                data=new InvoiceDetails();
+                data.setInvoiceDetailsIdPk(rs.getInt(1));
+                
+                data.setInvoiceIdFk(rs.getInt(2));
+                data.setInvoiceItemIdFk(rs.getInt(3));
+                data.setInvoiceItemQuantity(rs.getInt(4));
+                data.setInvoiceItemTotalPrice(rs.getInt(5));
+                
+                
+                invoiceDetailsList.add(data);
+        
+                
+            }
+            prest.close();
+            con.close();
+           
+          
+           
+            //need to return auto incremented id
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+       return invoiceDetailsList;
+       }
        
       
 }
