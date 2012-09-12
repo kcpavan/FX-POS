@@ -86,13 +86,15 @@ public class InvoiceDaoImpl implements InvoiceDao {
                    
                     + "invoice_user_id_fk ,"
                     + "invoice_date,"
-                    + " invoice_total )"
-                    +"  VALUES(?,?,?) ";
+                    + "invoice_total_items,"
+                    + " invoice_total_amount )"
+                    +"  VALUES(?,?,?,?) ";
             PreparedStatement prest = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             prest.setInt(1, 1);
             Timestamp timeStamp=new Timestamp(new Date().getTime());
             prest.setTimestamp(2,timeStamp);
-            prest.setDouble(3, 0.0);
+             prest.setDouble(3, 0);
+            prest.setDouble(4, 0.0);
             
             prest.executeUpdate();
             

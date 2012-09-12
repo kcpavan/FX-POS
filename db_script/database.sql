@@ -1,10 +1,11 @@
+drop database  if exists storedb;
 create database storedb;
 
 
 drop table if exists storedb.mainuser;
 create table storedb.user
 (mainuser_id_pk integer primary key not null auto_increment,
-mainuser_username string not null,
+mainuser_username varchar(20) not null,
 mainuser_firstname timestamp not null,
 mainuser_lastname double not null,
 mainuser_state int not null,
@@ -12,10 +13,10 @@ mainuser_group_id_fk int not null
 );
 
 
-drop table if exist storedb.user_group
+drop table if exists storedb.user_group;
 create table storedb.user_group
 (group_id_pk integer primary key not null auto_increment,
-group_name string not null);
+group_name varchar(20) not null);
 
 drop table if exists storedb.items;
 create table storedb.items 
@@ -82,12 +83,6 @@ invoice_det_quantity double not null,
 invoice_det_total double not null
 );
 
-(invoice_details_id_pk integer primary key not null auto_increment,
-invoice_id_fk integer not null,
-item_id_fk integer not null,
-invoice_details_quantity double not null,
-invoice_details_total double not null
-);
 
 
 

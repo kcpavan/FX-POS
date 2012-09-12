@@ -10,6 +10,7 @@ import com.kcp.pos.dao.item.invoice.InvoiceDao;
 import com.kcp.pos.dao.item.invoice.InvoiceDaoImpl;
 import com.kcp.pos.modal.InvoiceDetails;
 import com.kcp.pos.modal.Item;
+import com.kcp.pos.utils.KCPUtils;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -117,13 +119,28 @@ public class InvoiceController implements Initializable {
         InvoiceDetails invoiceDetails = new InvoiceDetails();
 
 
-
+        System.out.println("itemName.getSelectionModel().getSelectedItem():"+itemName.getSelectionModel().getSelectedItem());
         Object selectedItem = itemName.getSelectionModel().getSelectedItem();
+        
+        if(selectedItem==null)
+        {
+             label.setText("Please select item");
+        animateMessage();
+        fillDataTable();
+        
+        System.out.println("reenter item");
+        return;
+        }
 
         String invoiceNum = invoiceNumber.getText();
+        
+        
 
-        if (invoiceNum == null) {
+        System.out.println("Invoice number:"+invoiceNum);
+        
+        if (invoiceNum == null || invoiceNum.equalsIgnoreCase("")) {
             invoiceNum = new Integer(invoiceDao.getInvoiceId()).toString();
+            System.out.println("new invoice number:"+invoiceNum);
         }
         invoiceDetails.setInvoiceIdFk(Integer.parseInt(invoiceNum));
 
@@ -132,10 +149,23 @@ public class InvoiceController implements Initializable {
         itemDao.getIdByName(selectedItem.toString());
 
         String itemQty = itemQuantity.getText();
+        
+         if(KCPUtils.isNullString(itemQty))
+        {
+             label.setText("Please select item quantity");
+        animateMessage();
+        fillDataTable();
+        
+        System.out.println("reenter item");
+        return;
+        }
+         System.out.println("itemQuantity:"+itemQty);
+        
         invoiceDetails.setInvoiceItemQuantity(Integer.parseInt(itemQty));
 
         Item item = itemDao.getItemByName(selectedItem.toString());
 
+         System.out.println("selling price:"+item.getSellingPrice());
         double itemTotalPrice = item.getSellingPrice() * Integer.parseInt(itemQty);
 
         invoiceDetails.setInvoiceItemTotalPrice(itemTotalPrice);
@@ -154,6 +184,7 @@ public class InvoiceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        itemName.getItems().removeAll("Item 1", "Item 2", "Item 3", " ");
         weightUnit.getItems().removeAll("Item 1", "Item 2", "Item 3", " ");
         weightUnit.getItems().addAll("choose", "mg", "cg", "dg", "g", "kg");
         dataTable.setItems(dataTableData);

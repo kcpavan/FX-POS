@@ -104,7 +104,7 @@
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
                             <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
                             <TableColumn prefWidth="75.0" text="Billing Price" fx:id="itemBillingPrice" />
-                            <TableColumn prefWidth="75.0" text="Quantity" fx:id="itemQuantity" />
+                            <TableColumn prefWidth="75.0" text="Quantity" fx:id="itemQuantityCol" />
                             <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotal" />
                           </columns>
                         </TableView>

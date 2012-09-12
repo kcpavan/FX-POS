@@ -83,7 +83,7 @@ public class ItemDaoImpl implements ItemDao{
        try {
             Connection con = DBConnect.getConnection();
             String sql = "select item_id_pk from"
-                    + " items where item_name="+Name;
+                    + " items where item_name='"+Name+"'";
             
             PreparedStatement prest = con.prepareStatement(sql);
             
@@ -121,7 +121,7 @@ item_hasfree boolean not null
             */
             Connection con = DBConnect.getConnection();
             String sql = "select item_selling_price from"
-                    + " items where item_name="+Name;
+                    + " items where item_name='"+Name+"'";
             
             PreparedStatement prest = con.prepareStatement(sql);
             

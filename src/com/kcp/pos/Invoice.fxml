@@ -87,7 +87,7 @@
               </font>
             </Label>
             <Label fx:id="invoiceNumber" layoutX="366.0" layoutY="14.0" prefHeight="22.0" prefWidth="71.0" />
-            <Label fx:id="invoiceNumber" layoutX="335.0" layoutY="17.0" prefWidth="69.0" text="Label" />
+            <Label fx:id="invoiceNumber" layoutX="335.0" layoutY="17.0" prefWidth="69.0" />
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="698.0">
