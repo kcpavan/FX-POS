@@ -115,4 +115,65 @@ public class Item {
     public double getItemMrp() {
         return itemMrp.get();
     }
+
+   
+
+    public void setItemBarcode(SimpleStringProperty itemBarcode) {
+        this.itemBarcode = itemBarcode;
+    }
+
+   
+
+    public void setItemName(SimpleStringProperty itemName) {
+        this.itemName = itemName;
+    }
+
+  
+
+    public void setItemMrp(SimpleDoubleProperty itemMrp) {
+        this.itemMrp = itemMrp;
+    }
+
+    public double getItemWeight() {
+        return itemWeight.get();
+    }
+
+    public void setItemWeight(SimpleDoubleProperty itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public SimpleStringProperty getItemWeightUnit() {
+        return itemWeightUnit;
+    }
+
+    public void setItemWeightUnit(SimpleStringProperty itemWeightUnit) {
+        this.itemWeightUnit = itemWeightUnit;
+    }
+
+    public SimpleDoubleProperty getItemSellingPrice() {
+        return itemSellingPrice;
+    }
+
+    public void setItemSellingPrice(SimpleDoubleProperty itemSellingPrice) {
+        this.itemSellingPrice = itemSellingPrice;
+    }
+
+    public SimpleDoubleProperty getItemActualPrice() {
+        return itemActualPrice;
+    }
+
+    public void setItemActualPrice(SimpleDoubleProperty itemActualPrice) {
+        this.itemActualPrice = itemActualPrice;
+    }
+
+    public SimpleBooleanProperty getItemHasFree() {
+        return itemHasFree;
+    }
+
+    public void setItemHasFree(SimpleBooleanProperty itemHasFree) {
+        this.itemHasFree = itemHasFree;
+    }
+    
+    
+    
 }

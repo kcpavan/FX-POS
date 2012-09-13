@@ -88,13 +88,13 @@
                   <content>
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                       <children>
-                        <TableView id="dataTable" fx:id="itemWeightUnitCol" prefHeight="317.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="dataTable" prefHeight="317.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
                             <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
                             <TableColumn prefWidth="75.0" text="Weight" fx:id="itemWeightCol" />
-                            <TableColumn prefWidth="75.0" text="Weight Unit" fx:id="itemWeightCol" />
+                            <TableColumn prefWidth="75.0" text="Weight Unit" fx:id="itemWeightUnitCol" />
                             <TableColumn prefWidth="75.0" text="Actual Price" fx:id="itemActualPriceCol" />
                             <TableColumn prefWidth="75.0" text="Selling Price" fx:id="itemSellingPriceCol" />
                             <TableColumn prefWidth="75.0" text="Has Gift" fx:id="itemHasGiftCol" />
