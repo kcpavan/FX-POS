@@ -10,6 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  *
  * @author pavankumar
@@ -18,6 +22,13 @@ public class POSMain extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+       // ApplicationContext context = new AnnotationConfigApplicationContext(AppSpringConfiguration.class);
+      
+       ApplicationContext context = 
+            new ClassPathXmlApplicationContext("Spring-config.xml");
+
+        
         //Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("Invoice.fxml"));
         
@@ -36,6 +47,7 @@ public class POSMain extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+   
         launch(args);
     }
 }
