@@ -83,7 +83,7 @@
             <Label fx:id="label" layoutX="394.0" layoutY="197.0" minHeight="16.0" minWidth="69.0" />
             <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="250.0" layoutY="14.0" prefWidth="69.0" text="Invoice">
               <font>
-                <Font size="16.0" />
+                <Font size="16.0" fx:id="x2" />
               </font>
             </Label>
             <Label fx:id="invoiceNumber" layoutX="366.0" layoutY="14.0" prefHeight="22.0" prefWidth="71.0" />
@@ -98,7 +98,7 @@
                   <content>
                     <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                       <children>
-                        <TableView fx:id="dataTable" prefHeight="317.0" prefWidth="698.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="dataTable" prefHeight="261.0" prefWidth="698.0" AnchorPane.bottomAnchor="94.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
@@ -108,6 +108,8 @@
                             <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotal" />
                           </columns>
                         </TableView>
+                        <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="473.0" layoutY="263.0" prefHeight="26.0" prefWidth="69.0" text="Total" />
+                        <Label fx:id="Total" layoutX="603.0" layoutY="266.0" prefHeight="20.0" prefWidth="54.0" />
                       </children>
                     </AnchorPane>
                   </content>

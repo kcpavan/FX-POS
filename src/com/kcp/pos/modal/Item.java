@@ -4,6 +4,7 @@
  */
 package com.kcp.pos.modal;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -100,6 +101,16 @@ public class Item {
     public SimpleStringProperty itemName = new SimpleStringProperty("<Name>");
     
     public SimpleDoubleProperty itemMrp = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemWeight = new SimpleDoubleProperty();
+    
+    public SimpleStringProperty itemWeightUnit = new SimpleStringProperty();
+    
+    public SimpleDoubleProperty itemSellingPrice = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemActualPrice = new SimpleDoubleProperty();
+    
+    public SimpleBooleanProperty itemHasFree = new SimpleBooleanProperty();
 
     public double getItemMrp() {
         return itemMrp.get();

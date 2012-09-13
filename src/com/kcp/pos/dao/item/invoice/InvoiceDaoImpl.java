@@ -85,17 +85,18 @@ public class InvoiceDaoImpl implements InvoiceDao {
             Connection con = DBConnect.getConnection();
             String sql = "INSERT INTO invoice ("
                    
-                    + "invoice_user_id_fk ,"
-                    + "invoice_date,"
-                    + "invoice_total_items,"
-                    + " invoice_total_amount )"
+                    + "invoice_total_items ,"
+                    + "invoice_total_amount,"
+                    + "invoice_modified_user_id_fk,"
+                    + "invoice_modified_date )"
                     +"  VALUES(?,?,?,?) ";
             PreparedStatement prest = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             prest.setInt(1, 1);
+            prest.setDouble(2, 0.0);
+            prest.setInt(3, 1);
             Timestamp timeStamp=new Timestamp(new Date().getTime());
-            prest.setTimestamp(2,timeStamp);
-             prest.setDouble(3, 0);
-            prest.setDouble(4, 0.0);
+            prest.setTimestamp(4,timeStamp);
+            
             
             prest.executeUpdate();
             
@@ -131,6 +132,7 @@ invoice_det_total double not null
             PreparedStatement prest = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             prest.setInt(1, invoiceDetails.getInvoiceIdFk());
           
+            System.out.println("invoiceDetails.getInvoiceItemIdFk():"+invoiceDetails.getInvoiceItemIdFk());
             prest.setInt(2,invoiceDetails.getInvoiceItemIdFk());
             prest.setInt(3, invoiceDetails.getInvoiceItemQuantity());
             prest.setDouble(4,invoiceDetails.getInvoiceItemQuantity()*item.getSellingPrice());

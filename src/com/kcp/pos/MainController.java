@@ -56,6 +56,13 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Item, String> itemNameCol;
     @FXML private TableColumn<Item, String> itemBarcodeCol;
     @FXML private TableColumn<Item, Double> itemMRP;
+    @FXML private TableColumn<Item, Double> itemWeightCol;
+    @FXML private TableColumn<Item, String> itemWeightUnitCol;
+    @FXML private TableColumn<Item, Double> itemActualPriceCol;
+    @FXML private TableColumn<Item, Double> itemSellingPriceCol;
+    @FXML private TableColumn<Item, Double> itemHasGiftCol;
+    @FXML private TableColumn<Item, Double> itemTotalAmountsCol;
+    
     
     ItemDao itemDao = new ItemDaoImpl();
     
@@ -91,6 +98,37 @@ public class MainController implements Initializable {
                 new PropertyValueFactory<Item, String>("itemName"));
           itemMRP.setCellValueFactory(
                 new PropertyValueFactory<Item, Double>("itemMrp"));
+          itemWeightCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("itemWeight"));
+          itemWeightUnitCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, String>("weightUnit"));
+          itemActualPriceCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("actualPrice"));
+          itemSellingPriceCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("sellingPrice"));
+          itemHasGiftCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("hasGift"));
+          /*itemTotalAmountsCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("itemWeight"));*/
+          /*
+           * 
+           *   public SimpleStringProperty itemBarcode = new SimpleStringProperty("<BarCode>");
+
+    public SimpleStringProperty itemName = new SimpleStringProperty("<Name>");
+    
+    public SimpleDoubleProperty itemMrp = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemWeight = new SimpleDoubleProperty();
+    
+    public SimpleStringProperty itemWeightUnit = new SimpleStringProperty();
+    
+    public SimpleDoubleProperty itemSellingPrice = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemActualPrice = new SimpleDoubleProperty();
+    
+    public SimpleBooleanProperty itemHasFree = new SimpleBooleanProperty();
+           */
+          
          fillDataTable();
     }   
     

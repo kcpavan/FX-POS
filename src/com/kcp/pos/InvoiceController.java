@@ -154,9 +154,11 @@ public class InvoiceController implements Initializable {
 
 
        
-        itemDao.getIdByName(selectedItem.toString());
-
+        int id=itemDao.getIdByName(selectedItem.toString());
+         System.out.println("id:"+id);
+        invoiceDetails.setInvoiceItemIdFk(id);
         String itemQty = itemQuantity.getText();
+        
         
          if(KCPUtils.isNullString(itemQty))
         {
@@ -248,7 +250,8 @@ public class InvoiceController implements Initializable {
     private void fillInvoiceDataTable() {
         ItemDao itemDao = new ItemDaoImpl();
         invoiceNumber.getText();
-        List<InvoiceDetails> items = invoiceDao.getInvoiceItems(invoiceNumber.getText());
+        List<InvoiceDetails> invoiceDetailsList = invoiceDao.getInvoiceItems(invoiceNumber.getText());
+        List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
         System.out.println("items in list" + items.size());
         dataTableData.setAll(items);
     }

@@ -93,6 +93,12 @@
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
                             <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
+                            <TableColumn prefWidth="75.0" text="Weight" fx:id="itemWeightCol" />
+                            <TableColumn prefWidth="75.0" text="Weight Unit" fx:id="itemWeightUnitCol" />
+                            <TableColumn prefWidth="75.0" text="Actual Price" fx:id="itemActualPriceCol" />
+                            <TableColumn prefWidth="75.0" text="Selling Price" fx:id="itemSellingPriceCol" />
+                            <TableColumn prefWidth="75.0" text="Has Gift" fx:id="itemHasGiftCol" />
+                            <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotalCostCol" />
                           </columns>
                         </TableView>
                       </children>

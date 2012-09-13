@@ -22,6 +22,8 @@ public interface ItemDao {
 
     public Item getItemByName(String Name);
     
+    public List<Item> getItemListByInvoiceId(List<InvoiceDetails> invoiceDetailsList);
+    
     
     
    
