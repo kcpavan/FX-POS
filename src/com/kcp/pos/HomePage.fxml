@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="main_window" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.MainController">
+  <children>
+    <SplitPane focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <children>
+            <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="MenuButton">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+  <prefHeight>
+    <Long fx:value="700" />
+  </prefHeight>
+  <prefWidth>
+    <Long fx:value="700" />
+  </prefWidth>
+</AnchorPane>
