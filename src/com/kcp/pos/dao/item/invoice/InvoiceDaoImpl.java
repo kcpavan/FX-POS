@@ -19,7 +19,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -220,23 +222,63 @@ invoice_total_amount double not null
        public List<InvoiceDetails> getInvoiceItems(String invoiceNumber)
        {
             List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
-       try {
-        /*
-         * invoice_id_pk integer primary key not null auto_increment,
-invoice_total_items integer not null,
-invoice_user_id_fk integer not null,
-invoice_date timestamp not null,
-invoice_total_amount double not null
-         */
-           String name=null;
-            Connection con = DBConnect.getConnection();
+            Connection con=null;
+            PreparedStatement prest=null;
+            Map<Integer,Item> itemsMap=new HashMap<Integer,Item>();
             
+       try {
+             con = DBConnect.getConnection();
+            
+               String sql= "select item_id_pk,item_name,item_mrp,item_barcode,item_weight,"
+                       + "item_weight_unit,item_actual_price,item_hasfree from items";
+               
+             prest = con.prepareStatement(sql);
+            ResultSet  resultSet= prest.executeQuery();
+            while(resultSet.next()){
+               
+                Item item= new  Item();
+                item.setItemId(resultSet.getInt("item_id_pk"));
+                item.setName(resultSet.getString("item_name"));
+                item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
+                item.setBarcode(resultSet.getString("item_barcode"));
+                item.setWeight(resultSet.getDouble("item_weight"));
+                item.setWeightUnit(resultSet.getString("item_weight_unit"));
+                item.setActualPrice(resultSet.getDouble("item_actual_price"));
+                item.setHasGift(resultSet.getBoolean("item_hasfree"));
+                itemsMap.put(new Integer(item.getItemId()),item); 
+             
+            }
+       }
+       catch(SQLException es)
+       { 
+           es.printStackTrace();
+       }
+       
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                
+            }
+       finally
+       {
+            try {
+                con.close();
+                prest.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(InvoiceDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }    
+       
+       
+       try{
+            
+             con = DBConnect.getConnection();
             if(KCPUtils.isNullString(invoiceNumber))
                 invoiceNumber="1";
             String sql = "select * from "
                     + " invoice_details where invoice_det_invoice_id_fk="+invoiceNumber;
             System.out.println("sql:"+sql);
-            PreparedStatement prest = con.prepareStatement(sql);
+            prest = con.prepareStatement(sql);
             
             ResultSet rs=prest.executeQuery();
             InvoiceDetails data=null;
@@ -250,20 +292,44 @@ invoice_total_amount double not null
                 data.setInvoiceItemQuantity(rs.getInt(4));
                 data.setInvoiceItemTotalPrice(rs.getInt(5));
                 
+                Item item=itemsMap.get(data.getInvoiceIdFk());
                 
+                data.setInvoiceItemIdFk(item.getItemId());
+        data.setName(item.getName());
+        data.setBarcode(item.getBarcode());
+        data.setMrp(item.getMrp());
+        data.setWeight(item.getWeight());
+        
+               
                 invoiceDetailsList.add(data);
         
                 
             }
-            prest.close();
-            con.close();
-           
+       }
+            catch(SQLException es)
+            {
+                Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, es);
+                es.printStackTrace();;
+                
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+       {
+            try {
+                prest.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(InvoiceDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+       }   
           
            
             //need to return auto incremented id
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        
        return invoiceDetailsList;
        }
        

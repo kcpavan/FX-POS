@@ -236,7 +236,7 @@ item_hasfree boolean not null
                        itemIdFk=itemIdFk.append(","+invoiceData.getInvoiceItemIdFk());
                    }
                }
-               String sql= "select item_name,item_mrp,item_barcode from items"
+               String sql= "select item_id_pk,item_name,item_mrp,item_barcode from items"
                        + " where item_id_pk in("+itemIdFk+")";
                 System.out.println("getItemListByInvoiceId() query:"+sql);
                System.out.println("itemIdFk:"+itemIdFk);
@@ -244,6 +244,7 @@ item_hasfree boolean not null
             ResultSet  resultSet= prest.executeQuery();
             while(resultSet.next()){
                 Item item= new  Item();
+                item.setItemId(resultSet.getInt("itemId"));
                 item.setName(resultSet.getString("item_name"));
                 item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
                 item.setBarcode(resultSet.getString("item_barcode"));

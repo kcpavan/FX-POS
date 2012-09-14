@@ -15,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Item {
 
+    private int itemId;
     private String name;
     private String barcode;
     private double mrp;
@@ -24,6 +25,16 @@ public class Item {
     private double sellingPrice;
     private boolean hasGift;
 
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    
+    
     public String getName() {
         return name;
     }

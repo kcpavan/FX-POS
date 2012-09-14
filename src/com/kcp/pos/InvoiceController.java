@@ -154,9 +154,10 @@ public class InvoiceController implements Initializable {
 
 
        
-        int id=itemDao.getIdByName(selectedItem.toString());
-         System.out.println("id:"+id);
-        invoiceDetails.setInvoiceItemIdFk(id);
+        //int id=itemDao.getIdByName(selectedItem.toString());
+        Item item=itemDao.getItemByName(selectedItem.toString());
+        
+        
         String itemQty = itemQuantity.getText();
         
         
@@ -173,7 +174,7 @@ public class InvoiceController implements Initializable {
         
         invoiceDetails.setInvoiceItemQuantity(Integer.parseInt(itemQty));
 
-        Item item = itemDao.getItemByName(selectedItem.toString());
+        
 
          System.out.println("selling price:"+item.getSellingPrice());
         double itemTotalPrice = item.getSellingPrice() * Integer.parseInt(itemQty);
@@ -251,9 +252,9 @@ public class InvoiceController implements Initializable {
         ItemDao itemDao = new ItemDaoImpl();
         invoiceNumber.getText();
         List<InvoiceDetails> invoiceDetailsList = invoiceDao.getInvoiceItems(invoiceNumber.getText());
-        List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
-        System.out.println("items in list" + items.size());
-        dataTableData.setAll(items);
+        //List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
+        System.out.println("invoice items list:" + invoiceDetailsList.size());
+        dataTableData.setAll(invoiceDetailsList);
     }
 
     public void saveAllInvoiceItems() {
