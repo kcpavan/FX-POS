@@ -15,15 +15,26 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Item {
 
+    private int itemId;
     private String name;
     private String barcode;
     private double mrp;
     private double weight;
     private String weightUnit;
     private double actualPrice;
-    private double sellingPrice;
+    private double billingPrice;
     private boolean hasGift;
 
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    
+    
     public String getName() {
         return name;
     }
@@ -64,12 +75,12 @@ public class Item {
         this.actualPrice = actualPrice;
     }
 
-    public double getSellingPrice() {
-        return sellingPrice;
+    public double getBillingPrice() {
+        return billingPrice;
     }
 
-    public void setSellingPrice(double sellingPrice) {
-        this.sellingPrice = sellingPrice;
+    public void setBillingPrice(double billingPrice) {
+        this.billingPrice = billingPrice;
     }
 
     public boolean isHasGift() {
@@ -106,7 +117,7 @@ public class Item {
     
     public SimpleStringProperty itemWeightUnit = new SimpleStringProperty();
     
-    public SimpleDoubleProperty itemSellingPrice = new SimpleDoubleProperty();
+    public SimpleDoubleProperty itemBillingPrice = new SimpleDoubleProperty();
     
     public SimpleDoubleProperty itemActualPrice = new SimpleDoubleProperty();
     
@@ -150,12 +161,12 @@ public class Item {
         this.itemWeightUnit = itemWeightUnit;
     }
 
-    public SimpleDoubleProperty getItemSellingPrice() {
-        return itemSellingPrice;
+    public SimpleDoubleProperty getItemBillingPrice() {
+        return itemBillingPrice;
     }
 
-    public void setItemSellingPrice(SimpleDoubleProperty itemSellingPrice) {
-        this.itemSellingPrice = itemSellingPrice;
+    public void setItemBillingPrice(SimpleDoubleProperty itemBillingPrice) {
+        this.itemBillingPrice = itemBillingPrice;
     }
 
     public SimpleDoubleProperty getItemActualPrice() {

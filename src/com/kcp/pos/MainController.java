@@ -74,7 +74,7 @@ public class MainController implements Initializable {
         item.setMrp(Double.valueOf(itemMrp.getText()));
         item.setWeight(Double.valueOf(itemWeight.getText()));
         item.setActualPrice(Double.valueOf(actualPrice.getText()));
-        item.setSellingPrice(Double.valueOf(sellingPrice.getText()));
+        item.setBillingPrice(Double.valueOf(sellingPrice.getText()));
         System.out.println("hasGift.getText()"+hasGift);
         item.setHasGift(hasGift.isSelected());
         item.setWeightUnit((String)weightUnit.getSelectionModel().getSelectedItem());

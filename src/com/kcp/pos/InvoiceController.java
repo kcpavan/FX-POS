@@ -64,8 +64,8 @@ public class InvoiceController implements Initializable {
     @FXML
     private ChoiceBox weightUnit = new ChoiceBox();
     @FXML
-    public TableView<Item> dataTable;
-    private final ObservableList<Item> dataTableData = FXCollections.observableArrayList();
+    public TableView<InvoiceDetails> dataTable;
+    private final ObservableList<InvoiceDetails> dataTableData = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Item, String> itemNameCol;
     @FXML
@@ -154,9 +154,10 @@ public class InvoiceController implements Initializable {
 
 
        
-        int id=itemDao.getIdByName(selectedItem.toString());
-         System.out.println("id:"+id);
-        invoiceDetails.setInvoiceItemIdFk(id);
+        //int id=itemDao.getIdByName(selectedItem.toString());
+        Item item=itemDao.getItemByName(selectedItem.toString());
+        
+        
         String itemQty = itemQuantity.getText();
         
         
@@ -173,10 +174,10 @@ public class InvoiceController implements Initializable {
         
         invoiceDetails.setInvoiceItemQuantity(Integer.parseInt(itemQty));
 
-        Item item = itemDao.getItemByName(selectedItem.toString());
+        
 
-         System.out.println("selling price:"+item.getSellingPrice());
-        double itemTotalPrice = item.getSellingPrice() * Integer.parseInt(itemQty);
+         System.out.println("selling price:"+item.getBillingPrice());
+        double itemTotalPrice = item.getBillingPrice() * Integer.parseInt(itemQty);
 
         invoiceDetails.setInvoiceItemTotalPrice(itemTotalPrice);
 
@@ -211,7 +212,7 @@ public class InvoiceController implements Initializable {
        itemMrp.setText(new Double(item.getMrp()).toString());
        itemWeight.setText(new Double(item.getWeight()).toString());
        //weightUnit.setSelectionModel(item.getWeightUnit());
-       billingPrice.setText(new Double(item.getSellingPrice()).toString());
+       billingPrice.setText(new Double(item.getBillingPrice()).toString());
        
        
       
@@ -228,6 +229,9 @@ public class InvoiceController implements Initializable {
                 new PropertyValueFactory<Item, String>("itemName"));
         itemMRP.setCellValueFactory(
                 new PropertyValueFactory<Item, Double>("itemMrp"));
+        itemBillingPrice.setCellValueFactory(
+                new PropertyValueFactory<Item, Double>("itemBillingPrice"));
+        
         fillInvoiceDataTable();
     }
 
@@ -251,9 +255,9 @@ public class InvoiceController implements Initializable {
         ItemDao itemDao = new ItemDaoImpl();
         invoiceNumber.getText();
         List<InvoiceDetails> invoiceDetailsList = invoiceDao.getInvoiceItems(invoiceNumber.getText());
-        List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
-        System.out.println("items in list" + items.size());
-        dataTableData.setAll(items);
+        //List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
+        System.out.println("invoice items list:" + invoiceDetailsList.size());
+        dataTableData.setAll(invoiceDetailsList);
     }
 
     public void saveAllInvoiceItems() {
@@ -280,7 +284,7 @@ public class InvoiceController implements Initializable {
          Object selectedItem = itemName.getSelectionModel().getSelectedItem();
         Item item = itemDao.getItemByName(selectedItem.toString());
 
-        double itemTotalPrice = item.getSellingPrice() * Integer.parseInt(itemQty);
+        double itemTotalPrice = item.getBillingPrice() * Integer.parseInt(itemQty);
 
         invoiceDetails.setInvoiceItemTotalPrice(itemTotalPrice);
 

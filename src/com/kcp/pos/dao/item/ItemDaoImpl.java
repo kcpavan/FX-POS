@@ -43,7 +43,7 @@ public class ItemDaoImpl implements ItemDao{
             prest.setDouble(3, item.getMrp());
             prest.setDouble(4, item.getWeight());
             prest.setDouble(5, item.getActualPrice());
-            prest.setDouble(6, item.getSellingPrice());
+            prest.setDouble(6, item.getBillingPrice());
             prest.setString(7, item.getWeightUnit());
             prest.setInt(8, 0);
             prest.setInt(9,1);
@@ -68,25 +68,13 @@ public class ItemDaoImpl implements ItemDao{
          try {
                Connection con = DBConnect.getConnection();
                String sql= "select item_name,item_mrp,item_barcode,item_weight,"
-                       + "item_weight_unit,item_actual_price,item_hasfree from items";
+                       + "item_weight_unit,item_actual_price,"
+                       + "item_selling_price,item_hasfree from items";
                
             PreparedStatement prest = con.prepareStatement(sql);
             ResultSet  resultSet= prest.executeQuery();
             while(resultSet.next()){
-                /*
-                 * item_id_pk integer primary key not null auto_increment,
-item_name varchar(250) not null,
-item_barcode varchar(250) not null,
-item_category_id_fk int null,
-item_mrp double not null,
-item_weight double not null,
-item_weight_unit varchar(50) not null,
-item_actual_price double not null,
-item_selling_price double not null,
-item_hasfree boolean not null,
-item_modified_user_id_fk int not null,
-item_modified_date timestamp
-                 */
+               
                 Item item= new  Item();
                 item.setName(resultSet.getString("item_name"));
                 item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
@@ -94,6 +82,8 @@ item_modified_date timestamp
                 item.setWeight(resultSet.getDouble("item_weight"));
                 item.setWeightUnit(resultSet.getString("item_weight_unit"));
                 item.setActualPrice(resultSet.getDouble("item_actual_price"));
+                item.setBillingPrice(resultSet.getDouble("item_selling_price"));
+                
                 item.setHasGift(resultSet.getBoolean("item_hasfree"));
              
                 
@@ -106,7 +96,7 @@ item_modified_date timestamp
                 item.itemWeight.set(item.getWeight());
                 item.itemWeightUnit.set(item.getWeightUnit());
                 item.itemActualPrice.set(item.getActualPrice());
-                item.itemSellingPrice.set(item.getSellingPrice());
+                item.itemBillingPrice.set(item.getBillingPrice());
                 item.itemHasFree.set(item.isHasGift());
                 
                 items.add(item); 
@@ -153,19 +143,9 @@ item_modified_date timestamp
       {
          Item item=new Item();
        try {
-           /*
-            * item_id_pk integer primary key not null auto_increment,
-item_name varchar(250) not null,
-item_barcode varchar(250) not null,
-item_mrp double not null,
-item_weight double not null,
-item_weight_unit varchar(50) not null,
-item_actual_price double not null,
-item_selling_price double not null,
-item_hasfree boolean not null
-            */
+           
             Connection con = DBConnect.getConnection();
-            String sql = "select item_selling_price from"
+            String sql = "select * from"
                     + " items where item_name='"+Name+"'";
             
             PreparedStatement prest = con.prepareStatement(sql);
@@ -173,7 +153,16 @@ item_hasfree boolean not null
             ResultSet rs=prest.executeQuery();
             while(rs.next())
             {
-                item.setSellingPrice(rs.getInt(1));
+                item.setItemId(rs.getInt("item_id_pk"));
+                 item.setName(rs.getString("item_name"));
+                item.setMrp(Double.valueOf(rs.getString("item_mrp")));
+                item.setBarcode(rs.getString("item_barcode"));
+                item.setWeight(rs.getDouble("item_weight"));
+                item.setWeightUnit(rs.getString("item_weight_unit"));
+                item.setActualPrice(rs.getDouble("item_actual_price"));
+                item.setBillingPrice(rs.getDouble("item_selling_price"));
+                
+                item.setHasGift(rs.getBoolean("item_hasfree"));
             }
             prest.close();
             con.close();

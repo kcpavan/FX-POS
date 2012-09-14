@@ -9,6 +9,7 @@ package com.kcp.pos.modal;
 
 import java.util.Date;
 import java.util.List;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -16,12 +17,33 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Prakash
  */
-public class InvoiceDetails extends Item{
+public class InvoiceDetails{
     private int invoiceDetailsIdPk;
     private int invoiceIdFk;
     private int invoiceItemIdFk;
     private int invoiceItemQuantity;
     private double invoiceItemTotalPrice;
+    
+    private Item item;
+    
+    
+    
+    
+    public SimpleStringProperty itemBarcode = new SimpleStringProperty("<BarCode>");
+
+    public SimpleStringProperty itemName = new SimpleStringProperty("<Name>");
+    
+    public SimpleDoubleProperty itemMrp = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemWeight = new SimpleDoubleProperty();
+    
+    public SimpleStringProperty itemWeightUnit = new SimpleStringProperty();
+    
+    public SimpleDoubleProperty itemBillingPrice = new SimpleDoubleProperty();
+    
+    public SimpleDoubleProperty itemActualPrice = new SimpleDoubleProperty();
+    
+    public SimpleBooleanProperty itemHasFree = new SimpleBooleanProperty();
 
     public InvoiceDetails(int invoiceIdFk, int invoiceItemIdFk, int invoiceItemQuantity, double invoiceItemTotalPrice) {
         this.invoiceIdFk = invoiceIdFk;
@@ -86,6 +108,62 @@ public class InvoiceDetails extends Item{
 
     public void setInvoiceItemQuantity(int invoiceItemQuantity) {
         this.invoiceItemQuantity = invoiceItemQuantity;
+    }
+
+    public String getItemBarcode() {
+        return itemBarcode.get();
+    }
+
+    public String getItemName() {
+        return itemName.get();
+    }
+
+    public Double getItemMrp() {
+        return itemMrp.get();
+    }
+
+    public Double getItemWeight() {
+        return itemWeight.get();
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public String getItemWeightUnit() {
+        return itemWeightUnit.get();
+    }
+
+    public void setItemWeightUnit(SimpleStringProperty itemWeightUnit) {
+        this.itemWeightUnit = itemWeightUnit;
+    }
+
+    public Double getItemBillingPrice() {
+        return itemBillingPrice.get();
+    }
+
+    public void setItemBillingPrice(SimpleDoubleProperty itemBillingPrice) {
+        this.itemBillingPrice = itemBillingPrice;
+    }
+
+    public Double getItemActualPrice() {
+        return itemActualPrice.get();
+    }
+
+    public void setItemActualPrice(SimpleDoubleProperty itemActualPrice) {
+        this.itemActualPrice = itemActualPrice;
+    }
+
+    public Boolean getItemHasFree() {
+        return itemHasFree.get();
+    }
+
+    public void setItemHasFree(SimpleBooleanProperty itemHasFree) {
+        this.itemHasFree = itemHasFree;
     }
 
     

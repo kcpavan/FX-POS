@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author pbhimanna
  */
-public class Invoice extends Item {
+public class Invoice{
     
 
     private int invoiceNumber;

@@ -19,7 +19,9 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,11 +64,53 @@ public class InvoiceDaoImpl implements InvoiceDao {
          
          return invoice;
      }
-    public List<Invoice> getAllItems()
+    public List<InvoiceDetails> getAllItems()
     {
-        List<Invoice> invoiceList=new ArrayList<Invoice>();
-        
-        return invoiceList;
+        List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
+         try {
+               Connection con = DBConnect.getConnection();
+               String sql= "select  invoice_det_id_pk,"
+                       + "invoice_det_invoice_id_fk ,"+
+                       "invoice_det_item_id_fk," +
+                   " invoice_det_quantity,"+
+                    "invoice_det_total  "
+                       + "from invoice_details";
+               
+            PreparedStatement prest = con.prepareStatement(sql);
+            ResultSet  resultSet= prest.executeQuery();
+            while(resultSet.next()){
+               
+                InvoiceDetails invoceDet= new  InvoiceDetails();
+                invoceDet.getItem().setName(resultSet.getString("item_name"));
+                invoceDet.getItem().setMrp(Double.valueOf(resultSet.getString("item_mrp")));
+                invoceDet.getItem().setBarcode(resultSet.getString("item_barcode"));
+                invoceDet.getItem().setWeight(resultSet.getDouble("item_weight"));
+                invoceDet.getItem().setWeightUnit(resultSet.getString("item_weight_unit"));
+                invoceDet.getItem().setActualPrice(resultSet.getDouble("item_actual_price"));
+                invoceDet.getItem().setBillingPrice(resultSet.getDouble("item_selling_price"));
+                
+                invoceDet.getItem().setHasGift(resultSet.getBoolean("item_hasfree"));
+             
+                
+                System.out.println("invoceDet.getName():"+invoceDet.getItem().getName());
+                
+                invoceDet.itemName.set(invoceDet.getItem().getName());
+                invoceDet.itemBarcode.set(invoceDet.getItem().getBarcode());
+                invoceDet.itemMrp.set(invoceDet.getItem().getMrp());
+                System.out.println("item.getWeight():"+invoceDet.getItem().getWeight());
+                invoceDet.itemWeight.set(invoceDet.getItem().getWeight());
+                invoceDet.itemWeightUnit.set(invoceDet.getItem().getWeightUnit());
+                invoceDet.itemActualPrice.set(invoceDet.getItem().getActualPrice());
+                invoceDet.itemBillingPrice.set(invoceDet.getItem().getBillingPrice());
+                invoceDet.itemHasFree.set(invoceDet.getItem().isHasGift());
+                
+                invoiceDetailsList.add(invoceDet); 
+            } 
+            
+         } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return invoiceDetailsList;
     }
     
    
@@ -133,9 +177,10 @@ invoice_det_total double not null
             prest.setInt(1, invoiceDetails.getInvoiceIdFk());
           
             System.out.println("invoiceDetails.getInvoiceItemIdFk():"+invoiceDetails.getInvoiceItemIdFk());
-            prest.setInt(2,invoiceDetails.getInvoiceItemIdFk());
+            System.out.println("item id:"+item.getItemId());
+            prest.setInt(2,item.getItemId());
             prest.setInt(3, invoiceDetails.getInvoiceItemQuantity());
-            prest.setDouble(4,invoiceDetails.getInvoiceItemQuantity()*item.getSellingPrice());
+            prest.setDouble(4,invoiceDetails.getInvoiceItemQuantity()*item.getBillingPrice());
             
             
             prest.executeUpdate();
@@ -172,7 +217,7 @@ invoice_total_amount double not null
             ResultSet rs=prest.executeQuery();
             while(rs.next())
             {
-                invoice.setSellingPrice(rs.getInt(1));
+                invoice.setInvoiceNumber(rs.getInt(1));
             }
             prest.close();
             con.close();
@@ -220,23 +265,63 @@ invoice_total_amount double not null
        public List<InvoiceDetails> getInvoiceItems(String invoiceNumber)
        {
             List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
-       try {
-        /*
-         * invoice_id_pk integer primary key not null auto_increment,
-invoice_total_items integer not null,
-invoice_user_id_fk integer not null,
-invoice_date timestamp not null,
-invoice_total_amount double not null
-         */
-           String name=null;
-            Connection con = DBConnect.getConnection();
+            Connection con=null;
+            PreparedStatement prest=null;
+            Map<Integer,Item> itemsMap=new HashMap<Integer,Item>();
             
+       try {
+             con = DBConnect.getConnection();
+            
+               String sql= "select item_id_pk,item_name,item_mrp,item_barcode,item_weight,"
+                       + "item_weight_unit,item_actual_price,item_hasfree from items";
+               
+             prest = con.prepareStatement(sql);
+            ResultSet  resultSet= prest.executeQuery();
+            while(resultSet.next()){
+               
+                Item item= new  Item();
+                item.setItemId(resultSet.getInt("item_id_pk"));
+                item.setName(resultSet.getString("item_name"));
+                item.setMrp(Double.valueOf(resultSet.getString("item_mrp")));
+                item.setBarcode(resultSet.getString("item_barcode"));
+                item.setWeight(resultSet.getDouble("item_weight"));
+                item.setWeightUnit(resultSet.getString("item_weight_unit"));
+                item.setActualPrice(resultSet.getDouble("item_actual_price"));
+                item.setHasGift(resultSet.getBoolean("item_hasfree"));
+                itemsMap.put(new Integer(item.getItemId()),item); 
+             
+            }
+       }
+       catch(SQLException es)
+       { 
+           es.printStackTrace();
+       }
+       
+            catch(Exception e)
+            {
+                e.printStackTrace();
+                
+            }
+       finally
+       {
+            try {
+                con.close();
+                prest.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(InvoiceDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       }    
+       
+       
+       try{
+            
+             con = DBConnect.getConnection();
             if(KCPUtils.isNullString(invoiceNumber))
                 invoiceNumber="1";
             String sql = "select * from "
                     + " invoice_details where invoice_det_invoice_id_fk="+invoiceNumber;
             System.out.println("sql:"+sql);
-            PreparedStatement prest = con.prepareStatement(sql);
+            prest = con.prepareStatement(sql);
             
             ResultSet rs=prest.executeQuery();
             InvoiceDetails data=null;
@@ -250,20 +335,61 @@ invoice_total_amount double not null
                 data.setInvoiceItemQuantity(rs.getInt(4));
                 data.setInvoiceItemTotalPrice(rs.getInt(5));
                 
+                data.setItem(new Item());
                 
+                Item item=itemsMap.get(data.getInvoiceItemIdFk());
+                
+                data.setInvoiceItemIdFk(item.getItemId());
+                data.getItem().setName(item.getName());
+                data.getItem().setBarcode(item.getBarcode());
+                data.getItem().setMrp(item.getMrp());
+                data.getItem().setWeight(item.getWeight());
+        
+                data.itemName.set(item.getName());
+                data.itemBarcode.set(item.getBarcode());
+                data.itemMrp.set(item.getMrp());
+                System.out.println("**item.getSellingPrice():"+item.getBillingPrice());
+                data.itemWeight.set(item.getWeight());
+                
+                data.itemWeightUnit.set(item.getWeightUnit());
+                data.itemActualPrice.set(item.getActualPrice());
+                data.itemBillingPrice.set(item.getBillingPrice());
+                data.itemHasFree.set(item.isHasGift());
+        
+        
+        
+        
+        
+               
                 invoiceDetailsList.add(data);
         
                 
             }
-            prest.close();
-            con.close();
-           
+       }
+            catch(SQLException es)
+            {
+                Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, es);
+                es.printStackTrace();;
+                
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+            finally
+       {
+            try {
+                prest.close();
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(InvoiceDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+       }   
           
            
             //need to return auto incremented id
-        } catch (SQLException ex) {
-            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        
        return invoiceDetailsList;
        }
        
