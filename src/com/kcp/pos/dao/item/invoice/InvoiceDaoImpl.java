@@ -273,7 +273,7 @@ invoice_total_amount double not null
              con = DBConnect.getConnection();
             
                String sql= "select item_id_pk,item_name,item_mrp,item_barcode,item_weight,"
-                       + "item_weight_unit,item_actual_price,item_hasfree from items";
+                       + "item_weight_unit,item_actual_price,item_selling_price,item_hasfree from items";
                
              prest = con.prepareStatement(sql);
             ResultSet  resultSet= prest.executeQuery();
@@ -288,6 +288,8 @@ invoice_total_amount double not null
                 item.setWeightUnit(resultSet.getString("item_weight_unit"));
                 item.setActualPrice(resultSet.getDouble("item_actual_price"));
                 item.setHasGift(resultSet.getBoolean("item_hasfree"));
+                item.setBillingPrice(resultSet.getDouble("item_selling_price"));
+                
                 itemsMap.put(new Integer(item.getItemId()),item); 
              
             }
@@ -344,6 +346,7 @@ invoice_total_amount double not null
                 data.getItem().setBarcode(item.getBarcode());
                 data.getItem().setMrp(item.getMrp());
                 data.getItem().setWeight(item.getWeight());
+                data.getItem().setBillingPrice(item.getBillingPrice());
         
                 data.itemName.set(item.getName());
                 data.itemBarcode.set(item.getBarcode());

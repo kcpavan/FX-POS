@@ -103,9 +103,9 @@
                             <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
                             <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
                             <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRP" />
-                            <TableColumn prefWidth="75.0" text="Billing Price" fx:id="itemBillingPrice" />
+                            <TableColumn prefWidth="75.0" text="Billing Price" fx:id="itemBillingPriceCol" />
                             <TableColumn prefWidth="75.0" text="Quantity" fx:id="itemQuantityCol" />
-                            <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotal" />
+                            <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotalAmountCol" />
                           </columns>
                         </TableView>
                         <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="473.0" layoutY="263.0" prefHeight="26.0" prefWidth="69.0" text="Total" />

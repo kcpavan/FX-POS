@@ -73,11 +73,11 @@ public class InvoiceController implements Initializable {
     @FXML
     private TableColumn<Item, Double> itemMRP;
     @FXML
-    private TableColumn<Item, Double> itemBillingPrice;
+    private TableColumn<Item, Double> itemBillingPriceCol;
     @FXML
     private TableColumn<Item, Double> itemQuantityCol;
     @FXML
-    private TableColumn<Item, Double> itemTotal;
+    private TableColumn<Item, Double> itemTotalAmountCol;
     
     private List<InvoiceDetails> invoiceDetailsList=new ArrayList<InvoiceDetails>();
     private List<Item> itemList=new ArrayList<Item>();
@@ -229,8 +229,15 @@ public class InvoiceController implements Initializable {
                 new PropertyValueFactory<Item, String>("itemName"));
         itemMRP.setCellValueFactory(
                 new PropertyValueFactory<Item, Double>("itemMrp"));
-        itemBillingPrice.setCellValueFactory(
+        itemBillingPriceCol.setCellValueFactory(
                 new PropertyValueFactory<Item, Double>("itemBillingPrice"));
+        
+       itemQuantityCol.setCellValueFactory(
+                new PropertyValueFactory<Item, Double>("itemQuantity"));
+               
+               itemTotalAmountCol.setCellValueFactory(
+                new PropertyValueFactory<Item, Double>("itemTotalAmount"));
+               
         
         fillInvoiceDataTable();
     }

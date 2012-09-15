@@ -7,8 +7,6 @@
 
 package com.kcp.pos.modal;
 
-import java.util.Date;
-import java.util.List;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -44,6 +42,10 @@ public class InvoiceDetails{
     public SimpleDoubleProperty itemActualPrice = new SimpleDoubleProperty();
     
     public SimpleBooleanProperty itemHasFree = new SimpleBooleanProperty();
+    
+     public SimpleDoubleProperty itemQuantity = new SimpleDoubleProperty();
+     
+     public SimpleDoubleProperty itemTotalAmount = new SimpleDoubleProperty();
 
     public InvoiceDetails(int invoiceIdFk, int invoiceItemIdFk, int invoiceItemQuantity, double invoiceItemTotalPrice) {
         this.invoiceIdFk = invoiceIdFk;
@@ -166,6 +168,42 @@ public class InvoiceDetails{
         this.itemHasFree = itemHasFree;
     }
 
+   
+
+    public void setItemBarcode(SimpleStringProperty itemBarcode) {
+        this.itemBarcode = itemBarcode;
+    }
+
+   
+
+    public void setItemName(SimpleStringProperty itemName) {
+        this.itemName = itemName;
+    }
+
+   
+
+    public void setItemWeight(SimpleDoubleProperty itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public Double getItemQuantity() {
+        return itemQuantity.get();
+    }
+
+    public void setItemQuantity(SimpleDoubleProperty itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
+
+    public Double getItemTotalAmount() {
+        return itemTotalAmount.get();
+    }
+
+    public void setItemTotalAmount(SimpleDoubleProperty itemTotalAmount) {
+        this.itemTotalAmount = itemTotalAmount;
+    }
+
+    
+    
     
     
 }
