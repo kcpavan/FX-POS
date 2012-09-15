@@ -335,7 +335,7 @@ invoice_total_amount double not null
                 data.setInvoiceIdFk(rs.getInt(2));
                 data.setInvoiceItemIdFk(rs.getInt(3));
                 data.setInvoiceItemQuantity(rs.getInt(4));
-                data.setInvoiceItemTotalPrice(rs.getInt(5));
+                
                 
                 data.setItem(new Item());
                 
@@ -353,12 +353,15 @@ invoice_total_amount double not null
                 data.itemMrp.set(item.getMrp());
                 System.out.println("**item.getSellingPrice():"+item.getBillingPrice());
                 data.itemWeight.set(item.getWeight());
-                
+                data.itemQuantity.set(data.getInvoiceItemQuantity());
                 data.itemWeightUnit.set(item.getWeightUnit());
                 data.itemActualPrice.set(item.getActualPrice());
                 data.itemBillingPrice.set(item.getBillingPrice());
                 data.itemHasFree.set(item.isHasGift());
-        
+                
+                Double totalAmount=item.getBillingPrice()*data.getInvoiceItemQuantity();
+                data.setInvoiceItemTotalPrice(totalAmount);     
+                data.itemTotalAmount.set(totalAmount);
         
         
         

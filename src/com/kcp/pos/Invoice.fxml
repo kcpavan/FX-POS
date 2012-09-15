@@ -108,8 +108,8 @@
                             <TableColumn prefWidth="75.0" text="Total" fx:id="itemTotalAmountCol" />
                           </columns>
                         </TableView>
-                        <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="473.0" layoutY="263.0" prefHeight="26.0" prefWidth="69.0" text="Total" />
-                        <Label fx:id="Total" layoutX="603.0" layoutY="266.0" prefHeight="20.0" prefWidth="54.0" />
+                        <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="289.0" layoutY="276.0" prefHeight="26.0" prefWidth="69.00009999999747" text="Total" />
+                        <Label id="Total" fx:id="TotalAmount" layoutX="349.0" layoutY="274.0" prefHeight="28.0" prefWidth="190.0" text="Amount" />
                       </children>
                     </AnchorPane>
                   </content>

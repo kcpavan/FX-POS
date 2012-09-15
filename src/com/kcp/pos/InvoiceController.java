@@ -45,6 +45,9 @@ public class InvoiceController implements Initializable {
 
     @FXML
     private Label label;
+     @FXML
+    private Label TotalAmount;
+    
     @FXML
     private Label invoiceNumber;
     @FXML
@@ -264,8 +267,24 @@ public class InvoiceController implements Initializable {
         List<InvoiceDetails> invoiceDetailsList = invoiceDao.getInvoiceItems(invoiceNumber.getText());
         //List<Item> items=itemDao.getItemListByInvoiceId(invoiceDetailsList);
         System.out.println("invoice items list:" + invoiceDetailsList.size());
+        getInvoiceTotalAmount(invoiceDetailsList);
         dataTableData.setAll(invoiceDetailsList);
     }
+    
+    public void     getInvoiceTotalAmount(List<InvoiceDetails>  invoiceDetailsList)
+    {
+        Double amount=0.0;
+        
+        for(InvoiceDetails data:invoiceDetailsList)
+        {
+            amount=amount+data.getItemTotalAmount();
+        }
+        
+        TotalAmount.setText(amount.toString());
+        
+        
+    }
+    
 
     public void saveAllInvoiceItems() {
         InvoiceDetails invoiceDetails = new InvoiceDetails();
