@@ -2,13 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kcp.pos.dao.item.invoice;
+package com.kcp.pos.dao.invoice;
 
 import com.kcp.pos.dao.item.ItemDaoImpl;
-import com.kcp.pos.modal.Invoice;
-import com.kcp.pos.modal.InvoiceDetails;
+import com.kcp.pos.dao.stocks.StocksDao;
+import com.kcp.pos.dao.stocks.StocksDaoImpl;
 
-import com.kcp.pos.modal.Item;
+import com.kcp.pos.modal.invoice.Invoice;
+import com.kcp.pos.modal.invoice.InvoiceDetails;
+
+import com.kcp.pos.modal.item.Item;
 import com.kcp.pos.utils.DBConnect;
 import com.kcp.pos.utils.KCPUtils;
 import java.sql.Connection;
@@ -232,7 +235,7 @@ invoice_total_amount double not null
        }
     
        
-       public int saveInvoice(List<InvoiceDetails> invoiceDetailsList)
+       /*public int saveInvoice(List<InvoiceDetails> invoiceDetailsList)
        {
            int returnValue=0;
        try {
@@ -261,6 +264,43 @@ invoice_total_amount double not null
            
            return returnValue;
        }
+       */
+       
+       public int saveInvoice(List<InvoiceDetails> invoiceDetailsList)
+       {
+           int returnValue=0;
+           StocksDao stocksDao=new StocksDaoImpl();
+           
+       try {
+           double total=0.0;
+           int invoiceIdPk=0;
+           for(InvoiceDetails data:invoiceDetailsList)
+           {
+               //public int updateStocksOnInvoice(int itemId,int quantity)
+               stocksDao.updateStocksOnInvoice(data.getInvoiceItemIdFk(),data.getInvoiceItemQuantity());
+               total=total+data.getInvoiceItemTotalPrice();
+               invoiceIdPk=data.getInvoiceIdFk();
+           }
+            Connection con = DBConnect.getConnection();
+            String sql = "update invoice "
+                   
+                    + " set  invoice_total ="+total
+                    +"  where invoice_id_pk="+invoiceIdPk;
+            PreparedStatement prest = con.prepareStatement(sql);
+            
+            
+            returnValue=prest.executeUpdate();
+            
+            //need to return auto incremented id
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
+           
+           return returnValue;
+       }
+       
+       
        
        public List<InvoiceDetails> getInvoiceItems(String invoiceNumber)
        {
@@ -399,5 +439,33 @@ invoice_total_amount double not null
        return invoiceDetailsList;
        }
        
+       
+       public int deleteInvoiceItem(int invoiceId,int itemId)
+       {
+             
+           
+           
+           
+           int result=0;
+       try {
+            Connection con = DBConnect.getConnection();
+            
+            
+            
+               String sql= "delete from invoice_details where  invoice_det_invoice_id_fk="+invoiceId
+                       +" invoice_det_item_id_fk="+itemId;
+               
+            
+                PreparedStatement prest = con.prepareStatement(sql);
+         
+             result=prest.executeUpdate();
+            
+           
+            //need to return auto incremented id
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result; 
+       }
       
 }

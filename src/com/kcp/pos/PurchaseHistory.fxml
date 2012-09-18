@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="main_window" prefHeight="553.0" prefWidth="983.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.PurchaseController">
+  <children>
+    <SplitPane dividerPositions="0.9600725952813067" focusTraversable="true" orientation="VERTICAL" prefHeight="553.0" prefWidth="1110.0" AnchorPane.bottomAnchor="109.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-127.0" AnchorPane.topAnchor="-109.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="1108.0">
+          <children>
+            <Label fx:id="label" layoutX="17.0" layoutY="399.0" minHeight="16.0" minWidth="69.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="250.0" layoutY="14.0" prefWidth="69.0" text="Purchase">
+              <font>
+                <Font size="16.0" fx:id="x2" />
+              </font>
+            </Label>
+            <Label fx:id="invoiceNumber" layoutX="366.0" layoutY="14.0" prefHeight="22.0" prefWidth="71.0" />
+            <Label fx:id="invoiceNumber" layoutX="335.0" layoutY="17.0" prefWidth="69.0" />
+            <Label id="PurchaseNumber" fx:id="purchaseNumber" layoutX="353.0" layoutY="14.0" prefHeight="22.0" prefWidth="77.0" />
+            <TabPane prefHeight="853.9999000000025" prefWidth="1116.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-371.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="43.0">
+              <tabs>
+                <Tab fx:id="items_tab" text="Items">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="923.0">
+                      <children>
+                        <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="289.0" layoutY="276.0" prefHeight="26.0" prefWidth="69.00009999999747" text="Total" />
+                        <Label id="Total" fx:id="TotalAmount" layoutX="349.0" layoutY="274.0" prefHeight="28.0" prefWidth="190.0" text="Amount" />
+                        <TableView fx:id="dataTable" prefHeight="808.9999000000025" prefWidth="1158.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-42.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
+                            <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
+                            <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRPCol" />
+                            <TableColumn prefWidth="75.0" text="Quantity Case" fx:id="caseQuantityCol" />
+                            <TableColumn prefWidth="75.0" text="Quantity Units" fx:id="unitsQuantityCol" />
+                            <TableColumn prefWidth="75.0" text="Free Units" fx:id="freeUnitsCol" />
+                            <TableColumn prefWidth="75.0" text="Basic Rate" fx:id="basicRateCol" />
+                            <TableColumn prefWidth="75.0" text="Gross Amount" fx:id="grossAmountCol" />
+                            <TableColumn prefWidth="75.0" text="Scheme" fx:id="schemeCol" />
+                            <TableColumn prefWidth="75.0" text="CD" fx:id="cDCol" />
+                            <TableColumn prefWidth="75.0" text="Tax%" fx:id="taxPercentageCol" />
+                            <TableColumn prefWidth="75.0" text="Tax" fx:id="taxCol" />
+                            <TableColumn prefWidth="75.0" text="Net Amount" fx:id="netAmountCol" />
+                          </columns>
+                        </TableView>
+                      </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Stocks">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </children>
+        </AnchorPane>
+        <TextField prefWidth="200.0" />
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

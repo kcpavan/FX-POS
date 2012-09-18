@@ -19,7 +19,10 @@ public class POSMain extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("Invoice.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Invoice.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Purchase.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Stocks.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         
         Scene scene = new Scene(root);
         

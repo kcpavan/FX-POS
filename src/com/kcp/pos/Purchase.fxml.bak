@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="main_window" prefHeight="771.0" prefWidth="1037.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.PurchaseController">
+  <children>
+    <SplitPane dividerPositions="0.5604681404421327, 0.988296488946684" focusTraversable="true" orientation="VERTICAL" prefHeight="771.0" prefWidth="928.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-109.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="718.0">
+          <children>
+            <Button fx:id="button" layoutX="695.0" layoutY="386.0" onAction="#handleButtonAction" text="Add" />
+            <GridPane alignment="CENTER" layoutX="12.0" layoutY="62.0" prefHeight="261.0" prefWidth="252.0">
+              <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" text="Item Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <font>
+                    <Font size="15.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Label font="$x1" text="Barcode" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label font="$x1" text="MRP" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label font="$x1" text="Basic Rate" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField id="itemBarcode" fx:id="barcode" prefHeight="26.0" prefWidth="231.0" promptText="Barcode" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField id="itemMrp" fx:id="mrp" prefHeight="26.0" prefWidth="231.0" promptText="M.R.P" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField id="itemWeight" fx:id="basicRate" prefHeight="26.0" prefWidth="231.0" promptText="Basic Rate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ChoiceBox fx:id="itemName" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ChoiceBox>
+                <TextField id="GrossAmount" fx:id="grossAmount" prefWidth="200.0" promptText="Gross Amount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label prefHeight="26.0" prefWidth="123.0" text="Gross Amount" GridPane.columnIndex="0" GridPane.rowIndex="4">
+                  <font>
+                    <Font size="16.0" fx:id="x2" />
+                  </font>
+                </Label>
+                <Label font="$x2" text="Scheme" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField id="Scheme" fx:id="scheme" prefWidth="200.0" promptText="Scheme" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="132.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="120.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label fx:id="label" layoutX="17.0" layoutY="399.0" minHeight="16.0" minWidth="69.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" font="$x2" graphicTextGap="8.0" layoutX="250.0" layoutY="14.0" prefWidth="69.0" text="Purchase" />
+            <Label fx:id="invoiceNumber" layoutX="366.0" layoutY="14.0" prefHeight="22.0" prefWidth="71.0" />
+            <Label fx:id="invoiceNumber" layoutX="335.0" layoutY="17.0" prefWidth="69.0" />
+            <Label font="$x2" layoutX="386.0" layoutY="30.0" prefHeight="26.0" prefWidth="92.0" text="Quantity" />
+            <Label id="PurchaseNumber" fx:id="purchaseNumber" layoutX="353.0" layoutY="14.0" prefHeight="22.0" prefWidth="77.0" />
+            <TextField fx:id="netAmount" layoutX="457.0" layoutY="334.0" prefWidth="115.0" promptText="Net Amount" />
+            <Label font="$x2" layoutX="320.0" layoutY="334.0" text="Net Amount" />
+            <GridPane alignment="CENTER" layoutX="320.0" layoutY="58.0" prefHeight="261.0" prefWidth="252.0">
+              <children>
+                <Label id="Units" font="$x2" prefWidth="64.0" text="Units" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label font="$x1" prefHeight="26.0" prefWidth="54.0" text="Case" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField id="sellingPrice" fx:id="caseQuantity" prefHeight="26.0" prefWidth="133.0" promptText="quantity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField id="Units" fx:id="unitsQuantity" prefWidth="200.0" promptText="Units" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="FreeUnits" font="$x2" prefWidth="77.0" text="Free Units" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label id="CD" font="$x2" prefWidth="64.0" text="CD" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label font="$x2" text="Tax%" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField id="FreeUnits" fx:id="freeUnits" prefWidth="200.0" promptText="Free Units" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="CD" prefWidth="161.0" promptText="CD Amount" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField id="TaxPercentage" fx:id="taxPercentage" prefWidth="200.0" promptText="Tax%" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="taxAmount" prefWidth="200.0" promptText="Tax Amount" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label font="$x2" text="Tax Amount" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="137.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="115.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label fx:id="unitsPerCase" font="$x2" layoutX="615.0" layoutY="70.0" prefHeight="22.0" prefWidth="56.0" text="Units Per Case" />
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="1144.0">
+          <children>
+            <TabPane prefHeight="323.0" prefWidth="1144.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab fx:id="items_tab" text="Items">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="923.0">
+                      <children>
+                        <TableView fx:id="dataTable" prefHeight="278.0" prefWidth="1186.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-42.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
+                            <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
+                            <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRPCol" />
+                            <TableColumn prefWidth="75.0" text="Quantity Case" fx:id="caseQuantityCol" />
+                            <TableColumn prefWidth="75.0" text="Quantity Units" fx:id="unitsQuantityCol" />
+                            <TableColumn prefWidth="75.0" text="Free Units" fx:id="freeUnitsCol" />
+                            <TableColumn prefWidth="75.0" text="Basic Rate" fx:id="basicRateCol" />
+                            <TableColumn prefWidth="75.0" text="Gross Amount" fx:id="grossAmountCol" />
+                            <TableColumn prefWidth="75.0" text="Scheme" fx:id="schemeCol" />
+                            <TableColumn prefWidth="75.0" text="CD" fx:id="cDCol" />
+                            <TableColumn prefWidth="75.0" text="Tax%" fx:id="taxPercentageCol" />
+                            <TableColumn prefWidth="75.0" text="Tax" fx:id="taxCol" />
+                            <TableColumn prefWidth="75.0" text="Net Amount" fx:id="netAmountCol" />
+                          </columns>
+                        </TableView>
+                        <Label id="Total" fx:id="TotalLabel" font="$x2" layoutX="289.0" layoutY="276.0" prefHeight="26.0" prefWidth="69.00009999999747" text="Total" />
+                        <Label id="Total" fx:id="TotalAmount" layoutX="349.0" layoutY="274.0" prefHeight="28.0" prefWidth="190.0" text="Amount" />
+                      </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Stocks">
+                  <content>
+                    <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </children>
+        </AnchorPane>
+        <TextField prefWidth="200.0" />
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

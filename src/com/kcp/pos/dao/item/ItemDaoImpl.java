@@ -5,8 +5,8 @@
 
 package com.kcp.pos.dao.item;
 
-import com.kcp.pos.modal.InvoiceDetails;
-import com.kcp.pos.modal.Item;
+import com.kcp.pos.modal.invoice.InvoiceDetails;
+import com.kcp.pos.modal.item.Item;
 import com.kcp.pos.utils.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,7 +53,7 @@ public class ItemDaoImpl implements ItemDao{
             prest.setTimestamp(10, timeStamp);
             
          
-         
+            System.out.println("sql:"+sql);
             
             int count = prest.executeUpdate();
         } catch (SQLException ex) {
@@ -71,6 +71,8 @@ public class ItemDaoImpl implements ItemDao{
                        + "item_weight_unit,item_actual_price,"
                        + "item_selling_price,item_hasfree from items";
                
+               System.out.println("sql:"+sql);
+               
             PreparedStatement prest = con.prepareStatement(sql);
             ResultSet  resultSet= prest.executeQuery();
             while(resultSet.next()){
@@ -85,14 +87,15 @@ public class ItemDaoImpl implements ItemDao{
                 item.setBillingPrice(resultSet.getDouble("item_selling_price"));
                 
                 item.setHasGift(resultSet.getBoolean("item_hasfree"));
-             
+              System.out.println("item.getname():"+item.getName());
+              System.out.println("item.getBarcode():"+item.getBarcode());
                 
                 
                 
                 item.itemName.set(item.getName());
                 item.itemBarcode.set(item.getBarcode());
                 item.itemMrp.set(item.getMrp());
-                System.out.println("item.getWeight():"+item.getWeight());
+                System.out.println("item.getMrp():"+item.getMrp());
                 item.itemWeight.set(item.getWeight());
                 item.itemWeightUnit.set(item.getWeightUnit());
                 item.itemActualPrice.set(item.getActualPrice());

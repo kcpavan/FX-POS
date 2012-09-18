@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kcp.pos.modal;
+package com.kcp.pos.modal.invoice;
 
 import java.util.Date;
 import java.util.List;
@@ -40,20 +40,7 @@ public class Invoice{
     }
 
     
-    
-    /*private int itemIdFk;
-    private int 
-   
-    private String name;
-    private String barcode;
-    private double mrp;
-    private double weight;
-    private String weightUnit;
-    private double actualPrice;
-    private double sellingPrice;
-    private boolean hasGift;
-    private double quantity;*/
-
+ 
    
 
   

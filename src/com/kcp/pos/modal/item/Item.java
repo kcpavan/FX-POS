@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kcp.pos.modal;
+package com.kcp.pos.modal.item;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -161,24 +161,24 @@ public class Item {
         this.itemWeightUnit = itemWeightUnit;
     }
 
-    public SimpleDoubleProperty getItemBillingPrice() {
-        return itemBillingPrice;
+    public Double getItemBillingPrice() {
+        return itemBillingPrice.get();
     }
 
     public void setItemBillingPrice(SimpleDoubleProperty itemBillingPrice) {
         this.itemBillingPrice = itemBillingPrice;
     }
 
-    public SimpleDoubleProperty getItemActualPrice() {
-        return itemActualPrice;
+   public Double getItemActualPrice() {
+        return itemActualPrice.get();
     }
 
     public void setItemActualPrice(SimpleDoubleProperty itemActualPrice) {
         this.itemActualPrice = itemActualPrice;
     }
 
-    public SimpleBooleanProperty getItemHasFree() {
-        return itemHasFree;
+    public Boolean getItemHasFree() {
+        return itemHasFree.get();
     }
 
     public void setItemHasFree(SimpleBooleanProperty itemHasFree) {

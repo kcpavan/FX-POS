@@ -2,12 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kcp.pos.dao.item.invoice;
+package com.kcp.pos.dao.invoice;
 
-import com.kcp.pos.modal.Invoice;
+;
 
-import com.kcp.pos.modal.InvoiceDetails;
-import com.kcp.pos.modal.Item;
+import com.kcp.pos.modal.invoice.Invoice;
+import com.kcp.pos.modal.invoice.InvoiceDetails;
+import com.kcp.pos.modal.item.Item;
+import java.util.List;
+import com.kcp.pos.modal.invoice.InvoiceDetails;
+import com.kcp.pos.modal.item.Item;
 import java.util.List;
 
 /**
@@ -27,6 +31,8 @@ public interface InvoiceDao {
      public Invoice getInvoiceById();
      
     public List<InvoiceDetails> getInvoiceItems(String invoiceNumber);
+    
+    public int deleteInvoiceItem(int invoiceId,int itemId);
     
 
     

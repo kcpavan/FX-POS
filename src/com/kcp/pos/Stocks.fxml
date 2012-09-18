@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="main_window" prefHeight="552.9999000000025" prefWidth="965.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.StocksController">
+  <children>
+    <SplitPane dividerPositions="0.08348458865418994" focusTraversable="true" orientation="VERTICAL" prefHeight="553.0" prefWidth="1088.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-112.0" AnchorPane.topAnchor="-51.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="1108.0">
+          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="8.0" layoutX="250.0" layoutY="14.0" prefWidth="69.0" text="Stocks">
+              <font>
+                <Font size="16.0" fx:id="x2" />
+              </font>
+            </Label>
+          </children>
+        </AnchorPane>
+        <TableView fx:id="dataTable" prefHeight="501.0" prefWidth="1095.0">
+          <columns>
+            <TableColumn prefWidth="75.0" text="Name" fx:id="itemNameCol" />
+            <TableColumn prefWidth="75.0" text="BarCode" fx:id="itemBarcodeCol" />
+            <TableColumn prefWidth="75.0" text="M.R.P" fx:id="itemMRPCol" />
+            <TableColumn prefWidth="75.0" text="Quantity in Case" fx:id="caseQuantityCol" />
+            <TableColumn prefWidth="75.0" text="Quantity in Units" fx:id="unitsQuantityCol" />
+            <TableColumn prefWidth="75.0" text="Free Units" fx:id="freeUnitsCol" />
+          </columns>
+        </TableView>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>

@@ -66,8 +66,9 @@ drop table if exists storedb.stocks;
 create table storedb.stocks
 (stock_id_pk integer primary key not null auto_increment,
 stock_item_id_fk integer not null,
-stock_quantity bigint not null,
-stock_quantity_unit varchar(50) not null,
+stock_quantity_case bigint not null,
+stock_quantity_units bigint not null,
+stock_quantity_freeunits varchar(50) not null,
 stock_modified_user_id_fk int not null,
 stock_modified_date timestamp,
 CONSTRAINT fk_stocks_item_id
@@ -81,7 +82,7 @@ CONSTRAINT fk_stock_modified_user
 drop table if exists storedb.distributor;
 create table storedb.distributor
 (distributor_id_pk integer primary key not null auto_increment,
-distributor_name integer not null,
+distributor_name varchar(100) not null,
 distributor_address varchar(100) not null,
 distributor_phone_number integer(12) not null,
 distributor_modified_user_id_fk int not null,
@@ -91,11 +92,18 @@ CONSTRAINT fk_distributor_modified_user
 	REFERENCES `mainuser`(`mainuser_id_pk`)
 );
 
+INSERT INTO storedb.distributor
+(distributor_name ,
+distributor_address,
+distributor_phone_number,
+distributor_modified_user_id_fk,
+distributor_modified_date)
+values('test','b','2343','1','2012-01-08 22:11:34');
 
 drop table if exists storedb.purchase;
 create table storedb.purchase
 (purchase_id_pk integer primary key not null auto_increment,
-purchase_number integer not null,
+purchase_invoice_number integer not null,
 purchase_distibutor_id_fk integer not null,
 purchase_received_date timestamp not null,
 purchase_modified_user_id_fk int not null,
@@ -113,18 +121,27 @@ CONSTRAINT fk_purchase_distributor_id
 drop table if exists storedb.purchase_details;
 create table storedb.purchase_details
 (purchase_details_id_pk integer primary key not null auto_increment,
-purchase_item_id_fk integer not null,
-purchase_item_quantity integer not null,
-purchase_free_item integer null,
 purchase_id_fk integer not null,
+item_id_fk integer not null,
+mrp double not null,
+quantity_case integer null,
+quantity_units integer null,
+quantity_free integer null,
+basic_rate double not null,
+gross_amount double not null,
+scheme int not null,
+cd double not null,
+tax_percentage double not null,
+tax double not null,
+net_amount double not null,
+
 CONSTRAINT fk_purchase_det_item_id
-	FOREIGN KEY(`purchase_item_id_fk`) 
+	FOREIGN KEY(`item_id_fk`) 
 	REFERENCES `items`(`item_id_pk`),
 CONSTRAINT fk_purchase_id
 	FOREIGN KEY(`purchase_id_fk`) 
 	REFERENCES `purchase`(`purchase_id_pk`)
 );
-
 
 drop table if exists storedb.invoice;
 create table storedb.invoice
@@ -154,4 +171,23 @@ CONSTRAINT fk_invoicedet_invoice_id
 CONSTRAINT fk_invoice_item_id
 	FOREIGN KEY(`invoice_det_item_id_fk`) 
 	REFERENCES `items`(`item_id_pk`)
+);
+
+drop table if exists storedb.billing_price;
+create table storedb.billing_price 
+(id_pk integer primary key not null auto_increment,
+item_id int not null,
+quantity_begin int not null,
+quantity_end int not null,
+mrp double not null,
+actual_price double not null,
+billing_price double not null,
+modified_user int not null,
+modified_date timestamp,
+CONSTRAINT fk_item_id
+	FOREIGN KEY(`item_id`) 
+	REFERENCES `items`(`item_id_pk`),
+CONSTRAINT fk_modified_user
+	FOREIGN KEY(`modified_user`) 
+	REFERENCES `mainuser`(`mainuser_id_pk`)
 );

@@ -6,7 +6,7 @@ package com.kcp.pos;
 
 import com.kcp.pos.dao.item.ItemDao;
 import com.kcp.pos.dao.item.ItemDaoImpl;
-import com.kcp.pos.modal.Item;
+import com.kcp.pos.modal.item.Item;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -49,6 +50,8 @@ public class MainController implements Initializable {
     
     @FXML private ChoiceBox weightUnit = new ChoiceBox();
     
+    @FXML private Button SaveButton = new Button("Save");
+    
     @FXML public TableView<Item> dataTable;
   
     private final ObservableList<Item> dataTableData = FXCollections.observableArrayList();
@@ -59,7 +62,7 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Item, Double> itemWeightCol;
     @FXML private TableColumn<Item, String> itemWeightUnitCol;
     @FXML private TableColumn<Item, Double> itemActualPriceCol;
-    @FXML private TableColumn<Item, Double> itemSellingPriceCol;
+    @FXML private TableColumn<Item, Double> itemBillingPriceCol;
     @FXML private TableColumn<Item, Double> itemHasGiftCol;
     @FXML private TableColumn<Item, Double> itemTotalAmountsCol;
     
@@ -75,7 +78,7 @@ public class MainController implements Initializable {
         item.setWeight(Double.valueOf(itemWeight.getText()));
         item.setActualPrice(Double.valueOf(actualPrice.getText()));
         item.setBillingPrice(Double.valueOf(sellingPrice.getText()));
-        System.out.println("hasGift.getText()"+hasGift);
+        System.out.println("sellingPrice.getText():"+sellingPrice.getText());
         item.setHasGift(hasGift.isSelected());
         item.setWeightUnit((String)weightUnit.getSelectionModel().getSelectedItem());
         
@@ -103,9 +106,9 @@ public class MainController implements Initializable {
           itemWeightUnitCol.setCellValueFactory
                   (new PropertyValueFactory<Item, String>("weightUnit"));
           itemActualPriceCol.setCellValueFactory
-                  (new PropertyValueFactory<Item, Double>("actualPrice"));
-          itemSellingPriceCol.setCellValueFactory
-                  (new PropertyValueFactory<Item, Double>("sellingPrice"));
+                  (new PropertyValueFactory<Item, Double>("itemActualPrice"));
+          itemBillingPriceCol.setCellValueFactory
+                  (new PropertyValueFactory<Item, Double>("itemBillingPrice"));
           itemHasGiftCol.setCellValueFactory
                   (new PropertyValueFactory<Item, Double>("hasGift"));
           /*itemTotalAmountsCol.setCellValueFactory
@@ -154,5 +157,11 @@ public class MainController implements Initializable {
        dataTableData.setAll(items);
     }
     
+   
+    @FXML
+    private void saveInvoice(ActionEvent event) {
+    
+        
+    }
    
 }

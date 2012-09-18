@@ -8,18 +8,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="main_window" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.MainController">
+<AnchorPane id="AnchorPane" fx:id="main_window" xmlns:fx="http://javafx.com/fxml" fx:controller="com.kcp.pos.HomePageController">
   <children>
     <SplitPane focusTraversable="true" orientation="VERTICAL" prefHeight="700.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <items>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
           <children>
-            <MenuButton layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="MenuButton">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
-            </MenuButton>
+            <MenuBar layoutX="37.0" layoutY="22.0" prefWidth="394.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Item Inventory">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Purcase">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Invoice">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
           </children>
         </AnchorPane>
       </items>

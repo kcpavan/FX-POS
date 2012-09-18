@@ -5,8 +5,9 @@
 
 
 
-package com.kcp.pos.modal;
+package com.kcp.pos.modal.invoice;
 
+import com.kcp.pos.modal.item.Item;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;

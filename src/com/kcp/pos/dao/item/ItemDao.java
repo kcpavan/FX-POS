@@ -4,8 +4,8 @@
  */
 package com.kcp.pos.dao.item;
 
-import com.kcp.pos.modal.InvoiceDetails;
-import com.kcp.pos.modal.Item;
+import com.kcp.pos.modal.invoice.InvoiceDetails;
+import com.kcp.pos.modal.item.Item;
 import java.util.List;
 
 /**
